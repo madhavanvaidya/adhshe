@@ -74,7 +74,7 @@
               <h4 class="mb-2">Boost Your Productivity</h4>
               <p class="mb-4">Make the most out of your life!</p>
 
-              <form id="formAuthentication" class="mb-3" action="/api/register" method="POST">
+              <form id="formAuthentication" class="mb-3" action="/api/register" method="POST" onsubmit="return validatePassword()">
                 <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
                   <input
@@ -84,6 +84,7 @@
                     name="username"
                     placeholder="Enter your username"
                     autofocus
+                    required
                   />
                 </div>
                 <div class="mb-3">
@@ -100,6 +101,7 @@
                       name="password"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
+                      required
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
@@ -111,11 +113,13 @@
                       type="password"
                       id="confirm-password"
                       class="form-control"
-                      name="confirm-password"
+                      name="confirmPassword"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
+                      required
                     />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    <div id="passwordError" class="text-danger mt-2" style="display: none;"><%= error %></div>
                   </div>
                 </div>
 
@@ -165,3 +169,19 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
+
+<script>
+  function validatePassword() {
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+      var passwordError = document.getElementById("passwordError");
+  
+      if (password !== confirmPassword) {
+          passwordError.style.display = 'block'; // Show the error message
+          return false; // Prevent form submission
+      } else {
+          passwordError.style.display = 'none'; // Hide the error message
+          return true; // Allow form submission
+      }
+  }
+  </script>

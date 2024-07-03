@@ -30,13 +30,18 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-  const { email, password, username } = req.body;
+  const { email, password, username, confirmPassword } = req.body;
   try {
       // Check if a user with the provided email already exists
       const existingUser = await User.findOne({ email });
       if (existingUser) {
           return res.status(400).json({ message: 'User already exists' });
       }
+
+      // Check if password and confirm password are the same
+      if (password !== confirmPassword) {
+        return res.status(400).json({ message: 'Passwords do not match' });
+    }
 
       // Hash the password
       const hashedPassword = await bcrypt.hash(password, saltRounds);
