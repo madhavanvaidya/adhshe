@@ -70,13 +70,13 @@
         <ul class="menu-inner py-1">
           <!-- Dashboard -->
           <li class="menu-item active">
-            <a href="index.html" class="menu-link">
+            <a href="/index" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
               <div data-i18n="Analytics">Dashboard</div>
             </a>
           </li>
           <li class="menu-item">
-            <a href="#" class="menu-link">
+            <a href="/todo" class="menu-link">
               <i class="menu-icon tf-icons bx bx-list-check"></i>
               <div data-i18n="Analytics">To-Do List</div>
             </a>
@@ -243,14 +243,14 @@
                               <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                              <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                              <a class="dropdown-item" href="/todo">View More</a>
                               <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                             </div>
                           </div>
                         </div>
                         <span class="fw-semibold d-block mb-1">Tasks</span>
-                        <h3 class="card-title mb-2">46 / 75</h3>
-                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+                        <h3 class="card-title mb-2"><%= completedTasks %> / <%= totalTasks %></h3>
+                        <small class="text-success fw-semibold"></i> Completed <%= completionPercentage %>% tasks</small>
                       </div>
                     </div>
                   </div>
@@ -314,7 +314,7 @@
                           </div>
                           <div class="d-flex flex-column">
                             <small>June</small>
-                            <h6 class="mb-0">46/75 <span class="text-muted">Tasks Completed</span></h6>
+                            <h6 class="mb-0"><%= completedTasks %> / <%= totalTasks %> <span class="text-muted">Tasks Completed</span></h6>
                           </div>
                         </div>
                       </div>
