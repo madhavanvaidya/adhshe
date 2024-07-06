@@ -2,11 +2,13 @@ require('dotenv').config(); // Load environment variables from .env file
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const userRoutes = require('./routes/user');
+const todoRoutes = require('./routes/todo');
 const User = require('./models/User'); // Import User model
 
+
 const app = express();
-const session = require('express-session');
 
 // Set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -21,6 +23,7 @@ app.use(session({
     maxAge: 3600000 // Sets cookie expiry to one day
   }
 }));
+
 const port = process.env.PORT || 5000;
 const uri = process.env.MONGODB_URI; // Load MongoDB URI from .env file
 
@@ -30,17 +33,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // Add this line to handle f
 
 // Serve static files from the 'views' directory
 app.use(express.static('views'));
-
-// Routes
-app.use('/api', userRoutes);
-
-// MongoDB connection
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log('MongoDB connection error: ', err));
 
 // Middleware to check session
 function checkSession(req, res, next) {
@@ -59,6 +51,18 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
+// Routes
+app.use('/api', userRoutes);
+app.use('/api/todos', ensureAuthenticated, todoRoutes);
+
+// MongoDB connection
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.log('MongoDB connection error: ', err));
+
 // Apply checkSession middleware to the root route
 app.get('/', checkSession);
 
@@ -76,9 +80,28 @@ app.get('/fp', (req, res) => {
     res.sendFile('auth-forgot-password-basic.html', { root: './views' });
 });
 
-app.get('/index', ensureAuthenticated, (req, res) => {
-  // Assuming the username is stored in the session when the user logs in
-  res.render('index', { username: req.session.username });
+app.get('/index', ensureAuthenticated, async (req, res) => {
+  try {
+    const response = await fetch(`http://localhost:${port}/api/todos/summary`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': req.headers.cookie
+      }
+    });
+    const summary = await response.json();
+    const { total, completed } = summary;
+    const completionPercentage = total > 0 ? (completed / total) * 100 : 0;
+
+    res.render('index', { username: req.session.username, totalTasks: total, completedTasks: completed, completionPercentage: completionPercentage });
+  } catch (err) {
+    res.status(500).send('Error fetching tasks summary');
+  }
+});
+
+
+app.get('/todo', ensureAuthenticated, (req, res) => {
+  res.render('todo', { username: req.session.username });
 });
 
 // POST route for user registration
