@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const userRoutes = require('./routes/user');
 const todoRoutes = require('./routes/todo');
+const discussionRoutes = require('./routes/discussions')
 const User = require('./models/User'); // Import User model
 
 
@@ -54,6 +55,7 @@ function ensureAuthenticated(req, res, next) {
 // Routes
 app.use('/api', userRoutes);
 app.use('/api/todos', ensureAuthenticated, todoRoutes);
+app.use('/api/discussions', ensureAuthenticated, discussionRoutes)
 
 // MongoDB connection
 mongoose.connect(uri, {
@@ -119,6 +121,10 @@ app.post('/api/register', async (req, res) => {
     } catch (err) {
         res.status(400).send('<script>alert("Registration failed"); window.location.href = "/register";</script>');
     }
+});
+
+app.get('/community', (req, res) => {
+  res.render('community.ejs', { username: req.session.username });
 });
 
 app.get('/logout', (req, res) => {
