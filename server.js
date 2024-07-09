@@ -112,6 +112,10 @@ app.get("/todo", ensureAuthenticated, (req, res) => {
   res.render("todo", { username: req.session.username });
 });
 
+app.get('/aboutus', ensureAuthenticated, (req, res) => {
+  res.render('aboutus', { username: req.session.username });
+});
+
 // POST route for user registration
 app.post("/api/register", async (req, res) => {
   const { username, email, password } = req.body;

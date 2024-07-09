@@ -63,7 +63,7 @@
               <div data-i18n="Analytics">Dashboard</div>
             </a>
           </li>
-          <li class="menu-item active">
+          <li class="menu-item">
             <a href="/todo" class="menu-link">
               <i class="menu-icon tf-icons bx bx-list-check"></i>
               <div data-i18n="Analytics">To-Do List</div>
@@ -87,7 +87,7 @@
               <div data-i18n="Analytics">Insights</div>
             </a>
           </li>
-          <li class="menu-item">
+          <li class="menu-item active">
             <a href="/aboutus" class="menu-link">
               <i class="menu-icon tf-icons bx bxs-store"></i>
               <div data-i18n="Analytics">About Us</div>
@@ -179,26 +179,75 @@
 
         <!-- Content wrapper -->
         <div class="content-wrapper">
-          <!-- Content -->
-          <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
-              <div class="col-lg-8 mb-4 order-0">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title text-primary">To-Do List</h5>
-                    <form id="todo-form">
-                      <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="todo-input" placeholder="Enter a new to-do item" aria-label="Enter a new to-do item">
-                        <button class="btn btn-primary" type="submit">Add</button>
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <div class="row">
+                <div class="col-lg-12 mb-4 order-0">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title text-primary">About Us</h5>
+                      <p>Welcome to ADHShe! Our team is passionate about developing innovative solutions to support women's health, particularly in managing ADHD. We combine diverse skills and experiences to create applications that are user-friendly, effective, and transformative.</p>
+                      <div class="row p-4">
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center">
+                          <img src="../assets/img/avatars/madhavan.jpeg" alt="Madhavan" class="rounded-circle" style="width: 150px; margin-bottom: 5%;">
+                          <div class="col-md-4 m-4">
+                          <h6>Madhavan Vaidya</h6>
+                          <p>Full-stack Developer</p>
+                        </div>
+                        </div>
+                          <p>Versatile software developer with expertise in multiple programming languages including Python, Java, C, C++, and JavaScript. With a solid foundation in web development technologies such as HTML, CSS, PHP, Django, and ReactJS, I create dynamic and responsive web applications. Skilled in managing databases with MySQL and MongoDB, and proficient in using tools like Figma and GIT for design and version control.</p>
+                        
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center">
+                          <img src="../assets/img/avatars/ishan.jpg" alt="Ishan" class="rounded-circle" style="width: 150px; margin-bottom: 5%;">
+                          <div class="col-md-4 m-4">
+                          <h6>Ishan Sachadeva</h6>
+                          <p>Front-end Developer/Data Analyst</p>
+                        </div>
+                        </div>
+                          <p>Skilled software developer proficient in Python, Java, C, C++, and JavaScript. My expertise in web development spans HTML, CSS, and database management with MySQL. Well-versed in data science, including data analysis, machine learning, and AI. Additionally, experienced with UI/UX tools like Figma and Canvas, and familiar with Windows, MacOS, Unix, and Linux.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center">
+                          <img src="../assets/img/avatars/meghna.jpg" alt="Meghna" class="rounded-circle" style="width: 150px; margin-bottom: 5%;">
+                          <div class="col-md-4 m-4">
+                          <h6>Meghna Singh</h6>
+                          <p>Back-end Developer</p>
+                          </div>
+                        </div>
+                          <p>A recipient of Wipro's "Habit – Flagbearer" award, I bring extensive expertise in SAP PI/PO development, ReactJS, and Python to our team. With a solid background in development, testing, and technical documentation, I offer a diverse skill set including JavaScript, C, C++, Java, HTML5, CSS3, MS SQL Server, MySQL, and proficiency in tools such as Tableau, PowerBI, Git, and GitHub.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center">
+                            <img src="../assets/img/avatars/tanzeel.jpg" alt="Tanzeel" class="rounded-circle" style="width: 150px; margin-bottom: 5%;">
+                            <div class="col-md-4 m-4">
+                            <h6>Tanzeel Khan</h6>
+                          <p>Full-stack Developer</p>
+                            </div>
+                            </div>
+                          <p>Specializing in Python development, machine learning, and web development, I bring extensive experience in MySQL, Django, HTML, CSS, and JavaScript to seamlessly blend backend expertise with frontend finesse. Additionally, I am proficient in React and VueJS, enhancing my ability to deliver dynamic and responsive web applications.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="d-flex align-items-center">
+                            <img src="../assets/img/avatars/shivangi.jpg" alt="Shivangi" class="rounded-circle" style="width: 150px; margin-bottom: 5%;">
+                            <div class="col-md-4 m-4">
+                            <h6>Shivangi Singh</h6>
+                          <p>Back-end Developer</p>
+                            </div>
+                            </div>
+                          <p>Highly skilled software engineer with a foundation in Python, Java, and C++. Experienced in database management and data analysis. Proven track record of automating processes and improving efficiency during internships at Microsoft and Cisco. Adept at working in Linux environments and familiar with frameworks and tools like TensorFlow, Keras, and Selenium.</p>
+                        </div>
                       </div>
-                    </form>
-                    <ul id="todo-list" class="list-group"></ul>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- / Content -->
           </div>
-          <!-- / Content -->
+        <!-- / Content -->
 
           <!-- Footer -->
           <footer class="content-footer footer bg-footer-theme">
@@ -247,108 +296,6 @@
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const todoForm = document.getElementById('todo-form');
-      const todoInput = document.getElementById('todo-input');
-      const todoList = document.getElementById('todo-list');
-
-      // Fetch and display To-Do items
-      async function fetchTodos() {
-        try {
-          const response = await fetch('/api/todos');
-          const todos = await response.json();
-          todoList.innerHTML = '';
-          todos.forEach(todo => {
-            const listItem = document.createElement('li');
-            listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-            listItem.textContent = todo.text;
-            listItem.dataset.id = todo._id;
-            if (todo.completed) {
-              listItem.style.textDecoration = 'line-through';
-            }
-            const deleteButton = document.createElement('button');
-            deleteButton.className = 'btn btn-danger btn-sm';
-            deleteButton.textContent = 'Delete';
-            deleteButton.addEventListener('click', () => deleteTodo(todo._id));
-            const toggleButton = document.createElement('button');
-            toggleButton.className = 'btn btn-secondary btn-sm me-2';
-            toggleButton.textContent = todo.completed ? 'Unmark' : 'Mark';
-            toggleButton.addEventListener('click', () => toggleTodoCompleted(todo._id, !todo.completed));
-            const buttonGroup = document.createElement('div');
-            buttonGroup.appendChild(toggleButton);
-            buttonGroup.appendChild(deleteButton);
-            listItem.appendChild(buttonGroup);
-            todoList.appendChild(listItem);
-          });
-        } catch (error) {
-          console.error('Error fetching todos:', error);
-        }
-      }
-
-      // Add a new To-Do item
-      todoForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const text = todoInput.value.trim();
-        if (!text) return;
-        try {
-          const response = await fetch('/api/todos', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ text })
-          });
-          if (response.ok) {
-            fetchTodos();
-            todoInput.value = '';
-          } else {
-            console.error('Error adding todo:', await response.json());
-          }
-        } catch (error) {
-          console.error('Error adding todo:', error);
-        }
-      });
-
-      // Delete a To-Do item
-      async function deleteTodo(id) {
-        try {
-          const response = await fetch(`/api/todos/${id}`, {
-            method: 'DELETE'
-          });
-          if (response.ok) {
-            fetchTodos();
-          } else {
-            console.error('Error deleting todo:', await response.json());
-          }
-        } catch (error) {
-          console.error('Error deleting todo:', error);
-        }
-      }
-
-      // Toggle To-Do item completion
-      async function toggleTodoCompleted(id, completed) {
-        try {
-          const response = await fetch(`/api/todos/${id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ completed })
-          });
-          if (response.ok) {
-            fetchTodos();
-          } else {
-            console.error('Error updating todo:', await response.json());
-          }
-        } catch (error) {
-          console.error('Error updating todo:', error);
-        }
-      }
-
-      fetchTodos();
-    });
-  </script>
 </body>
 
 </html>
