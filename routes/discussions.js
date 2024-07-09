@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/new', async (req, res) => {
     const { title, content } = req.body;
-    const createdBy = req.session.username; // Assuming userId is stored in session
+    const createdBy = req.session.userId; // Assuming userId is stored in session
   
     try {
       const newDiscussion = new Discussion({
