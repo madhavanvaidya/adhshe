@@ -1,3 +1,14 @@
+require('dotenv').config(); // Load environment variables from .env file
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const userRoutes = require('./routes/user');
+const todoRoutes = require('./routes/todo');
+const pomodoroRoutes = require('./routes/pomodoro');
+
+const User = require('./models/User'); // Import User model
+
 require("dotenv").config(); // Load environment variables from .env file
 const express = require("express");
 const mongoose = require("mongoose");
@@ -57,6 +68,10 @@ function ensureAuthenticated(req, res, next) {
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes
+app.use('/api', userRoutes);
+app.use('/api/todos', ensureAuthenticated, todoRoutes);
+app.use('/pomodoro', pomodoroRoutes);
+
 app.use("/api", userRoutes);
 app.use("/api/todos", ensureAuthenticated, todoRoutes);
 app.use("/api/discussions", ensureAuthenticated, discussionRoutes);
@@ -136,6 +151,7 @@ app.get('/profile', ensureAuthenticated, async (req, res) => {
     res.status(500).send('Error fetching user data');
   }
 });
+
 
 // POST route for user registration
 app.post("/api/register", async (req, res) => {
