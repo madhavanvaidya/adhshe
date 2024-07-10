@@ -8,7 +8,7 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>Dashboard - ADHShe</title>
+  <title><%= firstname %>'s Profile - ADHShe</title>
 
   <meta name="description" content="" />
 
@@ -89,8 +89,8 @@
           </li>
           <li class="menu-item">
             <a href="#" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-dish"></i>
-              <div data-i18n="Analytics">Diet Analysis</div>
+              <i class="menu-icon tf-icons bx bxs-timer"></i>
+              <div data-i18n="Analytics">Pomodoro Timer</div>
             </a>
           </li>
           <li class="menu-item">
@@ -134,18 +134,25 @@
                         <h5 class="card-header">Profile Details</h5>
                         <!-- Account -->
                         <div class="card-body">
-                            <form action="" method="POST">
-                                <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                    <img src="../assets/img/avatars/no-image.png" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
-                                    <div class="button-wrapper">
-                                        <div class="input-group d-flex">
-                                            <input type="file" class="form-control" id="inputGroupFile02" name="upload">
-                                            <button class="btn btn-outline-primary" type="submit" id="inputGroupFileAddon04">Update profile photo</button>
-                                        </div>
-                                    </div>
-        
+                          <form action="/api/upload_photo" method="POST" enctype="multipart/form-data">
+                            <div class="d-flex align-items-start align-items-sm-center gap-4">
+                              <img 
+                                src="<%= profileImage ? '/' + profileImage : '../assets/img/avatars/no-image.png' %>" 
+                                alt="user-avatar" 
+                                class="d-block rounded" 
+                                height="100" 
+                                width="100" 
+                                id="uploadedAvatar" 
+                              />
+                              <div class="button-wrapper">
+                                <div class="input-group d-flex">
+                                  <input type="file" class="form-control" id="inputGroupFile02" name="upload">
+                                  <button class="btn btn-outline-primary" type="submit" id="inputGroupFileAddon04">Update profile photo</button>
                                 </div>
-                            </form>
+                              </div>
+                            </div>
+                          </form>
+                          
                         </div>
                         <hr class="my-0" />
                         <div class="card-body">

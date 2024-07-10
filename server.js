@@ -1,6 +1,7 @@
 require("dotenv").config(); // Load environment variables from .env file
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require('path');
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const userRoutes = require("./routes/user");
@@ -53,6 +54,8 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Routes
 app.use("/api", userRoutes);
 app.use("/api/todos", ensureAuthenticated, todoRoutes);
@@ -99,6 +102,7 @@ app.get("/index", ensureAuthenticated, async (req, res) => {
 
     res.render("index", {
       firstname: req.session.firstname,
+      profileImage: req.session.profileImage,
       totalTasks: total,
       completedTasks: completed,
       completionPercentage: completionPercentage,
@@ -109,11 +113,11 @@ app.get("/index", ensureAuthenticated, async (req, res) => {
 });
 
 app.get("/todo", ensureAuthenticated, (req, res) => {
-  res.render("todo", { firstname: req.session.firstname });
+  res.render("todo", { firstname: req.session.firstname, profileImage: req.session.profileImage });
 });
 
 app.get('/aboutus', ensureAuthenticated, (req, res) => {
-  res.render('aboutus', { firstname: req.session.firstname });
+  res.render('aboutus', { firstname: req.session.firstname, profileImage: req.session.profileImage });
 });
 
 // Profile route to render profile page with user data
@@ -125,7 +129,8 @@ app.get('/profile', ensureAuthenticated, async (req, res) => {
       lastname: user.lastname,
       email: user.email,
       gender: user.gender,
-      phone: user.phone
+      phone: user.phone,
+      profileImage: user.profileImage
     });
   } catch (err) {
     res.status(500).send('Error fetching user data');
@@ -160,7 +165,7 @@ app.post("/api/register", async (req, res) => {
 });
 
 app.get("/community", (req, res) => {
-  res.render("community.ejs", { firstname: req.session.firstname });
+  res.render("community.ejs", { firstname: req.session.firstname, profileImage: req.session.profileImage });
 });
 
 app.get("/logout", (req, res) => {
