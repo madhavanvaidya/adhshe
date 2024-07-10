@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const userRoutes = require('./routes/user');
 const todoRoutes = require('./routes/todo');
+const pomodoroRoutes = require('./routes/pomodoro');
+
 const User = require('./models/User'); // Import User model
 
 
@@ -54,6 +56,8 @@ function ensureAuthenticated(req, res, next) {
 // Routes
 app.use('/api', userRoutes);
 app.use('/api/todos', ensureAuthenticated, todoRoutes);
+app.use('/pomodoro', pomodoroRoutes);
+
 
 // MongoDB connection
 mongoose.connect(uri, {
@@ -103,6 +107,7 @@ app.get('/index', ensureAuthenticated, async (req, res) => {
 app.get('/todo', ensureAuthenticated, (req, res) => {
   res.render('todo', { username: req.session.username });
 });
+
 
 // POST route for user registration
 app.post('/api/register', async (req, res) => {
