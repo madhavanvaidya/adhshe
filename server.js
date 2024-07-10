@@ -1,14 +1,3 @@
-require('dotenv').config(); // Load environment variables from .env file
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const userRoutes = require('./routes/user');
-const todoRoutes = require('./routes/todo');
-const pomodoroRoutes = require('./routes/pomodoro');
-
-const User = require('./models/User'); // Import User model
-
 require("dotenv").config(); // Load environment variables from .env file
 const express = require("express");
 const mongoose = require("mongoose");
@@ -18,6 +7,7 @@ const session = require("express-session");
 const userRoutes = require("./routes/user");
 const todoRoutes = require("./routes/todo");
 const discussionRoutes = require("./routes/discussions");
+const pomodoroRoutes = require('./routes/pomodoro');
 const User = require("./models/User"); // Import User model
 
 const app = express();

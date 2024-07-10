@@ -18,7 +18,8 @@ router.get('/', ensureAuthenticated, async (req, res) => {
     // Fetch user settings if needed
     const settings = await Pomodoro.findOne({ userId: req.session.userId });
     res.render('pomodoro', {
-      username: req.session.username,
+      firstname: req.session.firstname,
+      profileImage: req.session.profileImage,
       workDuration: settings ? settings.workDuration : 25,
       breakDuration: settings ? settings.breakDuration : 5,
       longBreakDuration: settings ? settings.longBreakDuration : 15
