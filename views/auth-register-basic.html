@@ -76,14 +76,25 @@
 
               <form id="formAuthentication" class="mb-3" action="/api/register" method="POST" onsubmit="return validatePassword()">
                 <div class="mb-3">
-                  <label for="username" class="form-label">Username</label>
+                  <label for="firstname" class="form-label">First Name</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="username"
-                    name="username"
-                    placeholder="Enter your username"
+                    id="firstname"
+                    name="firstname"
+                    placeholder="Enter your First Name"
                     autofocus
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="lastname" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lastname"
+                    name="lastname"
+                    placeholder="Enter your Last Name"
                     required
                   />
                 </div>

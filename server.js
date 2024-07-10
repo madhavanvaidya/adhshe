@@ -98,7 +98,7 @@ app.get("/index", ensureAuthenticated, async (req, res) => {
     const completionPercentage = total > 0 ? (completed / total) * 100 : 0;
 
     res.render("index", {
-      username: req.session.username,
+      firstname: req.session.firstname,
       totalTasks: total,
       completedTasks: completed,
       completionPercentage: completionPercentage,
@@ -109,16 +109,32 @@ app.get("/index", ensureAuthenticated, async (req, res) => {
 });
 
 app.get("/todo", ensureAuthenticated, (req, res) => {
-  res.render("todo", { username: req.session.username });
+  res.render("todo", { firstname: req.session.firstname });
 });
 
 app.get('/aboutus', ensureAuthenticated, (req, res) => {
-  res.render('aboutus', { username: req.session.username });
+  res.render('aboutus', { firstname: req.session.firstname });
+});
+
+// Profile route to render profile page with user data
+app.get('/profile', ensureAuthenticated, async (req, res) => {
+  try {
+    const user = await User.findById(req.session.userId);
+    res.render('profile', { 
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      gender: user.gender,
+      phone: user.phone
+    });
+  } catch (err) {
+    res.status(500).send('Error fetching user data');
+  }
 });
 
 // POST route for user registration
 app.post("/api/register", async (req, res) => {
-  const { username, email, password } = req.body;
+  const { firstname, email, password } = req.body;
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -129,7 +145,7 @@ app.post("/api/register", async (req, res) => {
         );
     }
 
-    const newUser = new User({ username, email, password });
+    const newUser = new User({ firstname, email, password });
     const savedUser = await newUser.save();
     res.send(
       '<script>alert("Registration successful"); window.location.href = "/login";</script>'
@@ -144,7 +160,7 @@ app.post("/api/register", async (req, res) => {
 });
 
 app.get("/community", (req, res) => {
-  res.render("community.ejs", { username: req.session.username });
+  res.render("community.ejs", { firstname: req.session.firstname });
 });
 
 app.get("/logout", (req, res) => {

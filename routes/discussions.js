@@ -23,7 +23,7 @@ router.post('/new', async (req, res) => {
 
   router.get('/fetch', async (req, res) => {
     try {
-      const discussions = await Discussion.find().populate('createdBy', 'username').sort({ createdAt: -1 }); // Fetch discussions sorted by creation date
+      const discussions = await Discussion.find().populate('createdBy', 'firstname').sort({ createdAt: -1 }); // Fetch discussions sorted by creation date
       console.log('Discussions fetched:', discussions);
       res.json(discussions);
     } catch (err) {

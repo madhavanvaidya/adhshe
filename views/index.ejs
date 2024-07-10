@@ -53,7 +53,7 @@
 
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo">
-          <a href="index.html" class="app-brand-link">
+          <a href="/index" class="app-brand-link">
             <span class="app-brand-logo demo">
               <img src="../adhshe_icon.png" id="app-brand-logo" style="width: 50px;">
             </span>
@@ -153,16 +153,13 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li>
                     <a class="dropdown-item" href="#">
-                      <div class="d-flex">
+                      <div class="d-flex align-items-center">
                         <div class="flex-shrink-0 me-3">
                           <div class="avatar avatar-online">
                             <img src="../assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle" />
                           </div>
                         </div>
-                        <div class="flex-grow-1">
-                          <span class="fw-semibold d-block"><%= username %></span>
-                          <small class="text-muted">She/Her</small>
-                        </div>
+                          <span class="fw-semibold d-block"><%= firstname %></span>
                       </div>
                     </a>
                   </li>
@@ -170,7 +167,7 @@
                     <div class="dropdown-divider"></div>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="/profile">
                       <i class="bx bx-user me-2"></i>
                       <span class="align-middle">My Profile</span>
                     </a>

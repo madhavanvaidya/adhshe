@@ -132,16 +132,13 @@
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li>
                     <a class="dropdown-item" href="#">
-                      <div class="d-flex">
+                      <div class="d-flex align-items-center">
                         <div class="flex-shrink-0 me-3">
                           <div class="avatar avatar-online">
                             <img src="../assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle" />
                           </div>
                         </div>
-                        <div class="flex-grow-1">
-                          <span class="fw-semibold d-block"><%= username %></span>
-                          <small class="text-muted">She/Her</small>
-                        </div>
+                        <span class="fw-semibold d-block"><%= firstname %></span>
                       </div>
                     </a>
                   </li>
@@ -149,7 +146,7 @@
                     <div class="dropdown-divider"></div>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="/profile">
                       <i class="bx bx-user me-2"></i>
                       <span class="align-middle">My Profile</span>
                     </a>
@@ -186,7 +183,11 @@
                   <div class="card">
                     <div class="card-body">
                       <h5 class="card-title text-primary">About Us</h5>
-                      <p>Welcome to ADHShe! Our team is passionate about developing innovative solutions to support women's health, particularly in managing ADHD. We combine diverse skills and experiences to create applications that are user-friendly, effective, and transformative.</p>
+                      <div class="d-flex align-items-center m-4">
+                      <img src="../adhshe_icon.png" alt="FT Logo" class="rounded-circle" style="width: 200px; margin-bottom: 5%;">
+                      <p style="font-size: large;">At FrontEdge Technologies, we blend innovation with expertise to deliver cutting-edge solutions that drive progress. As a pioneer in technology services, we specialize in building robust software solutions tailored to the unique needs of our clients. Our approach combines advanced technology integration, comprehensive project management, and user-centric design, ensuring that every solution is not just implemented, but integrated smoothly and efficiently. From our state-of-the-art development in MERN Stack to our refined UI/UX designs in Figma, we are committed to enhancing operational excellence and empowering businesses to reach their full potential. Join us as we push the boundaries of what's possible.</p>
+                    </div>
+                    <h5 class="card-title text-primary">Meet Our Team</h5>
                       <div class="row p-4">
                         <div class="col-md-4">
                             <div class="d-flex align-items-center">
@@ -199,6 +200,7 @@
                           <p>Versatile software developer with expertise in multiple programming languages including Python, Java, C, C++, and JavaScript. With a solid foundation in web development technologies such as HTML, CSS, PHP, Django, and ReactJS, I create dynamic and responsive web applications. Skilled in managing databases with MySQL and MongoDB, and proficient in using tools like Figma and GIT for design and version control.</p>
                         
                         </div>
+                        
                         <div class="col-md-4">
                             <div class="d-flex align-items-center">
                           <img src="../assets/img/avatars/ishan.jpg" alt="Ishan" class="rounded-circle" style="width: 150px; margin-bottom: 5%;">

@@ -19,9 +19,13 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // Session creation using username
+    // Session creation using firstname
     req.session.userId = user._id;
-    req.session.username = user.username;
+    req.session.firstname = user.firstname;
+    req.session.lastname = user.lastname;
+    req.session.email = user.email;
+    req.session.phone = user.phone;
+    req.session.gender = user.gender;
     // If user and password are correct, redirect to index.html
     res.redirect('/index');
   } catch (err) {
@@ -30,7 +34,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-  const { email, password, username, confirmPassword } = req.body;
+  const { email, password, firstname, confirmPassword, lastname } = req.body;
   try {
       // Check if a user with the provided email already exists
       const existingUser = await User.findOne({ email });
@@ -47,7 +51,7 @@ router.post('/register', async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, saltRounds);
 
       // Create a new user with the hashed password
-      const newUser = new User({ email, password: hashedPassword, username });
+      const newUser = new User({ email, password: hashedPassword, firstname, lastname });
       const savedUser = await newUser.save();
 
       res.redirect('/login');
@@ -56,6 +60,23 @@ router.post('/register', async (req, res) => {
   }
 });
 
+// Route to handle profile update
+router.post('/update_profile', async (req, res) => {
+  try {
+    const { firstname, lastname, gender, phone, pronouns } = req.body;
+
+    await User.findByIdAndUpdate(req.session.userId, {
+      firstname,
+      lastname,
+      gender,
+      phone
+    });
+
+    res.redirect('/profile');
+  } catch (err) {
+    res.status(500).send('Error updating user profile');
+  }
+});
 
 
 module.exports = router;
