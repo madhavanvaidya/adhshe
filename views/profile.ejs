@@ -35,6 +35,8 @@
 
   <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
   <!-- Page CSS -->
 
   <!-- Helpers -->
@@ -76,6 +78,12 @@
             </a>
           </li>
           <li class="menu-item">
+            <a href="/index" class="menu-link">
+              <i class="menu-icon tf-icons bx bxs-store"></i>
+              <div data-i18n="Analytics">About</div>
+            </a>
+          </li>
+          <li class="menu-item">
             <a href="/todo" class="menu-link">
               <i class="menu-icon tf-icons bx bx-list-check"></i>
               <div data-i18n="Analytics">To-Do List</div>
@@ -94,21 +102,15 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="#" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-chart"></i>
-              <div data-i18n="Analytics">Insights</div>
+            <a href="/community" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-group"></i>
+              <div data-i18n="Analytics">Community Forum</div>
             </a>
           </li>
           <li class="menu-item">
             <a href="/aboutus" class="menu-link">
               <i class="menu-icon tf-icons bx bxs-store"></i>
-              <div data-i18n="Analytics">About Us</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="/community" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-group"></i>
-              <div data-i18n="Analytics">Community Forum</div>
+              <div data-i18n="Analytics">Meet the developers</div>
             </a>
           </li>
         </ul>
@@ -202,6 +204,26 @@
                         </div>
                         <!-- /Account -->
                     </div>
+                    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="confirmModalLabel">Confirm Deactivation</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                  <p>Are you sure you want to deactivate your account? This action cannot be undone.</p>
+                              </div>
+                              <div class="modal-footer">
+                                <form id="confirmDeactivationForm" action="/api/delete_account" method="POST">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                  <button type="submit" class="btn btn-danger">Yes, Deactivate</button>
+                                </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
                     <div class="card">
                         <h5 class="card-header">Delete Account</h5>
                         <div class="card-body">
@@ -212,7 +234,8 @@
                                 </div>
                             </div>
         
-                            <button type="submit" class="btn btn-danger deactivate-account" data-bs-toggle="modal" data-bs-target="#smallModal">Deactivate Account</button>
+                            <button type="button" class="btn btn-danger deactivate-account" data-bs-toggle="modal" data-bs-target="#confirmModal">Deactivate Account</button>
+
         
                         </div>
                     </div>
@@ -271,6 +294,52 @@
 
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+        $('#formAccountSettings').on('submit', function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/update_profile',
+                data: $(this).serialize(),
+                success: function(response) {
+                    toastr.success('Profile updated successfully');
+                },
+                error: function(error) {
+                    toastr.error('An error occurred while updating the profile');
+                }
+            });
+        });
+        
+    });
+</script>
+<script>
+  $(document).ready(function() {
+    // Handle form submission
+    $('#confirmDeactivationForm').on('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // AJAX request to handle account deletion
+      $.ajax({
+        type: 'POST',
+        url: '/api/delete_account',
+        success: function(response) {
+          toastr.success('Account deleted successfully');
+          // Redirect to login page after successful deletion
+          window.location.href = '/login'; // Replace with your actual login page URL
+        },
+        error: function(error) {
+          toastr.error('An error occurred while deactivating your account');
+        }
+      });
+    });
+  });
+</script>
+
 </body>
 
 </html>

@@ -28,6 +28,7 @@
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
   <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
   <!-- Page CSS -->
 
@@ -57,13 +58,20 @@
         </div>
         <div class="menu-inner-shadow"></div>
         <ul class="menu-inner py-1">
+          <!-- Dashboard -->
           <li class="menu-item">
             <a href="/index" class="menu-link">
               <i class="menu-icon tf-icons bx bx-home-circle"></i>
               <div data-i18n="Analytics">Dashboard</div>
             </a>
           </li>
-          <li class="menu-item active">
+          <li class="menu-item">
+            <a href="/index" class="menu-link">
+              <i class="menu-icon tf-icons bx bxs-store"></i>
+              <div data-i18n="Analytics">About</div>
+            </a>
+          </li>
+          <li class="menu-item">
             <a href="/todo" class="menu-link">
               <i class="menu-icon tf-icons bx bx-list-check"></i>
               <div data-i18n="Analytics">To-Do List</div>
@@ -82,21 +90,15 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="#" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-chart"></i>
-              <div data-i18n="Analytics">Insights</div>
+            <a href="/community" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-group"></i>
+              <div data-i18n="Analytics">Community Forum</div>
             </a>
           </li>
           <li class="menu-item">
             <a href="/aboutus" class="menu-link">
               <i class="menu-icon tf-icons bx bxs-store"></i>
-              <div data-i18n="Analytics">About Us</div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="/community" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-group"></i>
-              <div data-i18n="Analytics">Community Forum</div>
+              <div data-i18n="Analytics">Meet the developers</div>
             </a>
           </li>
         </ul>
@@ -249,6 +251,8 @@
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const todoForm = document.getElementById('todo-form');
@@ -304,6 +308,7 @@
           if (response.ok) {
             fetchTodos();
             todoInput.value = '';
+            showToast('Task created successfully', 'success');
           } else {
             console.error('Error adding todo:', await response.json());
           }
@@ -320,6 +325,7 @@
           });
           if (response.ok) {
             fetchTodos();
+            showToast('Task deleted', 'error');
           } else {
             console.error('Error deleting todo:', await response.json());
           }
@@ -340,12 +346,17 @@
           });
           if (response.ok) {
             fetchTodos();
+            showToast(completed ? 'Task completed' : 'Task unmarked', 'info');
           } else {
             console.error('Error updating todo:', await response.json());
           }
         } catch (error) {
           console.error('Error updating todo:', error);
         }
+      }
+
+      function showToast(message, type) {
+        toastr[type](message);
       }
 
       fetchTodos();
