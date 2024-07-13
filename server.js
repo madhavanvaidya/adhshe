@@ -140,6 +140,11 @@ app.get('/aboutus', ensureAuthenticated, (req, res) => {
   res.render('aboutus', { firstname: req.session.firstname, profileImage: req.session.profileImage });
 });
 
+app.get('/about1', ensureAuthenticated, (req, res) => {
+  res.render('about1', { firstname: req.session.firstname, profileImage: req.session.profileImage });
+});
+
+
 // Profile route to render profile page with user data
 app.get('/profile', ensureAuthenticated, async (req, res) => {
   try {
