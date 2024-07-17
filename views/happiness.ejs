@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+  <title>Dashboard - ADHShe</title>
+  <meta name="description" content="" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../adhshe_icon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+
+  <!-- Icons. Uncomment required icon fonts -->
+  <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="../assets/css/demo.css" />
+
+  <!-- Vendors CSS -->
+  <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+
+  <!-- Helpers -->
+  <script src="../assets/vendor/js/helpers.js"></script>
+  <script src="../assets/js/config.js"></script>
+</head>
+<body>
+  <!-- Layout wrapper -->
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+      <!-- Menu -->
+      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <div class="app-brand demo">
+          <a href="/index" class="app-brand-link">
+            <span class="app-brand-logo demo">
+              <img src="../adhshe_icon.png" id="app-brand-logo" style="width: 50px;">
+            </span>
+            <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform: none;">ADHShe</span>
+          </a>
+          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+          </a>
+        </div>
+        <div class="menu-inner-shadow"></div>
+        <ul class="menu-inner py-1">
+          <!-- Dashboard -->
+          <li class="menu-item">
+            <a href="/index" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <div data-i18n="Analytics">Dashboard</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="/index" class="menu-link">
+              <i class="menu-icon tf-icons bx bxs-store"></i>
+              <div data-i18n="Analytics">About</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="/todo" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-list-check"></i>
+              <div data-i18n="Analytics">To-Do List</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#" class="menu-link">
+              <i class="menu-icon tf-icons bx bxs-heart-circle"></i>
+              <div data-i18n="Analytics">Menstrual Cycle</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="/pomodoro" class="menu-link">
+              <i class="menu-icon tf-icons bx bxs-timer"></i>
+              <div data-i18n="Analytics">Pomodoro Timer</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="/community" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-group"></i>
+              <div data-i18n="Analytics">Community Forum</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="/aboutus" class="menu-link">
+              <i class="menu-icon tf-icons bx bxs-store"></i>
+              <div data-i18n="Analytics">Meet the developers</div>
+            </a>
+          </li>
+          <li class="menu-item active">
+            <a href="/happiness" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-smile"></i>
+              <div data-i18n="Analytics">Mood Tracker</div>
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- / Menu -->
+      <!-- Layout container -->
+      <div class="layout-page">
+        <!-- Navbar -->
+        <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+              <i class="bx bx-menu bx-sm"></i>
+            </a>
+          </div>
+          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+            <div class="navbar-nav align-items-center">
+              <div class="nav-item d-flex align-items-center">
+                <i class="bx bx-search fs-4 lh-0"></i>
+                <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." />
+              </div>
+            </div>
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
+              <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                  <div class="avatar avatar-online">
+                    <img src="<%= profileImage ? '/' + profileImage : '../assets/img/avatars/no-image.png' %>" alt="user-avatar" class="w-px-40 h-auto rounded-circle" />
+                  </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0 me-3">
+                          <div class="avatar avatar-online">
+                            <img src="<%= profileImage ? '/' + profileImage : '../assets/img/avatars/no-image.png' %>" alt class="w-px-40 h-auto rounded-circle" />
+                          </div>
+                        </div>
+                        <span class="fw-semibold d-block"><%= firstname %></span>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="dropdown-divider"></div>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/profile">
+                      <i class="bx bx-user me-2"></i>
+                      <span class="align-middle">My Profile</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <i class="bx bx-cog me-2"></i>
+                      <span class="align-middle">Settings</span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="dropdown-divider"></div>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/logout">
+                      <i class="bx bx-power-off me-2"></i>
+                      <span class="align-middle">Log Out</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <!-- / Navbar -->
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
+          <!-- Content -->
+          <div class="container-xxl flex-grow-1 container-p-y">
+            <style>
+              .form-group {
+                margin-bottom: 1.5rem;
+              }
+              .form-label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: bold;
+              }
+              .form-check-label {
+                margin-right: 1rem;
+              }
+              .form-check {
+                display: inline-block;
+                margin-right: 1rem;
+              }
+              .entries-list {
+                margin-top: 2rem;
+              }
+              .entry {
+                margin-bottom: 1rem;
+                padding: 1rem;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+              }
+              .happiness-section {
+                margin-bottom: 2rem;
+              }
+              .happiness-form button {
+                margin-top: 1rem;
+              }
+              .calendar-container {
+                margin-top: 2rem;
+              }
+              .legend {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+                margin-bottom: 1rem;
+              }
+              .legend-item {
+                display: flex;
+                align-items: center;
+              }
+              .legend-color {
+                width: 20px;
+                height: 20px;
+                margin-right: 0.5rem;
+                border: 1px solid #000;
+              }
+              .video-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+                margin-top: 2rem;
+              }
+              .video-container iframe {
+                width: 30%;
+                height: 200px;
+              }
+              select {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><polygon points="0,0 10,10 20,0" fill="black"/></svg>') no-repeat right 0.5rem center;
+                background-size: 1rem;
+              }
+            </style>
+            <div class="row">
+              <div class="col-lg-8 mb-4 order-0">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">Mood Tracker</h5>
+                    <form id="happiness-form" class="happiness-form">
+                      <div class="form-group">
+                        <label for="mood" class="form-label">Mood:</label>
+                        <select id="mood" name="mood" class="form-control" required>
+                          <option value="Very Unpleasant">Very Unpleasant</option>
+                          <option value="Unpleasant">Unpleasant</option>
+                          <option value="Slightly Unpleasant">Slightly Unpleasant</option>
+                          <option value="Neutral">Neutral</option>
+                          <option value="Slightly Pleasant">Slightly Pleasant</option>
+                          <option value="Pleasant">Pleasant</option>
+                          <option value="Very Pleasant">Very Pleasant</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="feelings" class="form-label">What best describes this feeling? (You can choose more than one)</label>
+                        <div id="feelings" class="form-check-group">
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Amazed" class="form-check-input"> Amazed
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Amused" class="form-check-input"> Amused
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Angry" class="form-check-input"> Angry
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Annoyed" class="form-check-input"> Annoyed
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Anxious" class="form-check-input"> Anxious
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Ashamed" class="form-check-input"> Ashamed
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Brave" class="form-check-input"> Brave
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Calm" class="form-check-input"> Calm
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Confident" class="form-check-input"> Confident
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Content" class="form-check-input"> Content
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Disappointed" class="form-check-input"> Disappointed
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Discouraged" class="form-check-input"> Discouraged
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Disgusted" class="form-check-input"> Disgusted
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Drained" class="form-check-input"> Drained
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="feelings" value="Embarrassed" class="form-check-input"> Embarrassed
+                          </label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="impact" class="form-label">What's having the biggest impact on you? (You can choose more than one)</label>
+                        <div id="impact" class="form-check-group">
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Health" class="form-check-input"> Health
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Hobbies" class="form-check-input"> Hobbies
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Fitness" class="form-check-input"> Fitness
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Identity" class="form-check-input"> Identity
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Self-Care" class="form-check-input"> Self-Care
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Spirituality" class="form-check-input"> Spirituality
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Community" class="form-check-input"> Community
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Partner" class="form-check-input"> Partner
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Family" class="form-check-input"> Family
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Dating" class="form-check-input"> Dating
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Friends" class="form-check-input"> Friends
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Tasks" class="form-check-input"> Tasks
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Weather" class="form-check-input"> Weather
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Work" class="form-check-input"> Work
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Education" class="form-check-input"> Education
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Current Events" class="form-check-input"> Current Events
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Travel" class="form-check-input"> Travel
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="impact" value="Money" class="form-check-input"> Money
+                          </label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="additionalContext" class="form-label">Additional Context:</label>
+                        <input type="text" id="additionalContext" name="additionalContext" class="form-control">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Log Mood</button>
+                    </form>
+                    <div class="calendar-container">
+                      <div class="legend">
+                        <div class="legend-item">
+                          <div class="legend-color" style="background-color: #e57373;"></div>
+                          <span>Very Unpleasant</span>
+                        </div>
+                        <div class="legend-item">
+                          <div class="legend-color" style="background-color: #ffb74d;"></div>
+                          <span>Unpleasant</span>
+                        </div>
+                        <div class="legend-item">
+                          <div class="legend-color" style="background-color: #ffd54f;"></div>
+                          <span>Slightly Unpleasant</span>
+                        </div>
+                        <div class="legend-item">
+                          <div class="legend-color" style="background-color: #fff176;"></div>
+                          <span>Neutral</span>
+                        </div>
+                        <div class="legend-item">
+                          <div class="legend-color" style="background-color: #aed581;"></div>
+                          <span>Slightly Pleasant</span>
+                        </div>
+                        <div class="legend-item">
+                          <div class="legend-color" style="background-color: #81c784;"></div>
+                          <span>Pleasant</span>
+                        </div>
+                        <div class="legend-item">
+                          <div class="legend-color" style="background-color: #4db6ac;"></div>
+                          <span>Very Pleasant</span>
+                        </div>
+                      </div>
+                      <div id="calendar"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 order-1">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                          <div class="avatar flex-shrink-0">
+                            <span class="badge bg-label-primary p-2"><i class="bx bx-task text-primary"></i></span>
+                          </div>
+                          <div class="dropdown">
+                            <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                              <a class="dropdown-item" href="/todo">View More</a>
+                              <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                            </div>
+                          </div>
+                        </div>
+                        <span class="fw-semibold d-block mb-1">Your Mood Entries</span>
+                        <ul id="happiness-entries" class="list-unstyled"></ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="video-section">
+              <h2>Discover Uplifting Frequencies to Enhance Your Mood</h2>
+              <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/8M143iRrbgw" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/IU13sdrLQ-M" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/68aN9aOcmHw" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/Op1rgjJAHb8" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/Lpavrcr03gg" frameborder="0" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/SpzW3FbQeT4" frameborder="0" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+          <!-- / Content -->
+          <!-- Footer -->
+          <footer class="content-footer footer bg-footer-theme">
+            <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+              <div class="mb-2 mb-md-0">
+                ©
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                , made with ❤️ by
+                <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">FrontEdge Technologies</a>
+              </div>
+            </div>
+          </footer>
+          <!-- / Footer -->
+          <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+      </div>
+      <!-- / Layout page -->
+    </div>
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+  </div>
+  <!-- Core JS -->
+  <!-- build:js assets/vendor/js/core.js -->
+  <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="../assets/vendor/libs/popper/popper.js"></script>
+  <script src="../assets/vendor/js/bootstrap.js"></script>
+  <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="../assets/vendor/js/menu.js"></script>
+  <!-- endbuild -->
+  <!-- Vendors JS -->
+  <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+  <!-- Main JS -->
+  <script src="../assets/js/main.js"></script>
+  <!-- Page JS -->
+  <script src="../assets/js/dashboards-analytics.js"></script>
+  <!-- FullCalendar JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+  <script>
+    const moodColors = {
+      "Very Unpleasant": "#e57373",
+      "Unpleasant": "#ffb74d",
+      "Slightly Unpleasant": "#ffd54f",
+      "Neutral": "#fff176",
+      "Slightly Pleasant": "#aed581",
+      "Pleasant": "#81c784",
+      "Very Pleasant": "#4db6ac"
+    };
+
+    let calendarEvents = [];
+
+    document.getElementById('happiness-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const form = event.target;
+      const data = {
+        mood: form.mood.value,
+        feelings: Array.from(form.feelings).filter(cb => cb.checked).map(cb => cb.value),
+        impact: Array.from(form.impact).filter(cb => cb.checked).map(cb => cb.value),
+        additionalContext: form.additionalContext.value
+      };
+
+      const response = await fetch('/happiness/log', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        const newEntry = await response.json();
+        addEntryToList(newEntry);
+        addEntryToCalendar(newEntry);
+        form.reset();
+      } else {
+        alert('Failed to log mood entry.');
+      }
+    });
+
+    async function fetchHappinessEntries() {
+      const response = await fetch('/happiness/entries');
+      const entries = await response.json();
+      calendarEvents = entries;
+      updateCalendar();
+      updateEntriesList(entries.slice(0, 10));
+    }
+
+    function addEntryToList(entry) {
+      const entriesList = document.getElementById('happiness-entries');
+      const listItem = document.createElement('li');
+      listItem.className = 'entry';
+      listItem.textContent = `Date: ${new Date(entry.date).toLocaleString()}, Mood: ${entry.mood}, Feelings: ${entry.feelings.join(', ')}, Impact: ${entry.impact.join(', ')}, Additional Context: ${entry.additionalContext}`;
+      entriesList.prepend(listItem); // Add new entry to the top of the list
+      if (entriesList.children.length > 8) {
+        entriesList.removeChild(entriesList.lastChild); // Remove the last entry if there are more than 8 entries
+      }
+    }
+
+    function updateEntriesList(entries) {
+      const entriesList = document.getElementById('happiness-entries');
+      entriesList.innerHTML = '';
+      entries.forEach(entry => addEntryToList(entry));
+    }
+
+    function addEntryToCalendar(entry) {
+      $('#calendar').fullCalendar('renderEvent', {
+        title: entry.mood,
+        start: new Date(entry.date),
+        backgroundColor: moodColors[entry.mood],
+        borderColor: moodColors[entry.mood],
+        textColor: '#000',
+        description: `Feelings: ${entry.feelings.join(', ')}, Impact: ${entry.impact.join(', ')}, Additional Context: ${entry.additionalContext}`
+      }, true);  // The true argument ensures the event is added permanently to the calendar
+
+      // Refetch events to ensure all views (month, week, day) are updated
+      $('#calendar').fullCalendar('refetchEvents');
+    }
+
+    function updateCalendar() {
+      $('#calendar').fullCalendar('removeEvents');
+      calendarEvents.forEach(entry => addEntryToCalendar(entry));
+    }
+
+    $(document).ready(function() {
+      $('#calendar').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        editable: false,
+        events: [],
+        eventRender: function(event, element) {
+          if (event.description) {
+            element.find('.fc-title').append(`<div class="fc-description">${event.description}</div>`);
+            element.attr('title', event.description);
+          }
+        },
+        viewRender: function(view) {
+          updateCalendar();
+        }
+      });
+
+      fetchHappinessEntries();
+    });
+  </script>
+</body>
+</html>
