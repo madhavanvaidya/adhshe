@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Menstrual Tracker</h1>
-        <form action="/tracker" method="post">
+        <form id="tracker-form">
             <label for="start-date">Start Date:</label>
             <input type="date" id="start-date" name="startDate" required>
             
@@ -19,17 +19,22 @@
             <button type="submit">Track</button>
         </form>
         
-        <% if (typeof nextPeriodDate !== 'undefined') { %>
-            <div id="result">
+        <div id="result">
+            <% if (typeof nextPeriodDate !== 'undefined') { %>
                 <p>Your next period is expected to start on: <strong><%= nextPeriodDate %></strong></p>
-            </div>
-        <% } %>
-        
-        <% if (typeof error !== 'undefined') { %>
-            <div id="error">
+            <% } %>
+            
+            <% if (typeof error !== 'undefined') { %>
                 <p style="color: red;"><%= error %></p>
-            </div>
-        <% } %>
+            <% } %>
+        </div>
+
+        <ul id="cycle-list"></ul>
+        <p id="average-cycle-length"></p>
+        <p id="next-period-date"></p>
     </div>
+
+    <script src="/scripts/tracker.js"></script>
 </body>
 </html>
+
