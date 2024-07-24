@@ -341,7 +341,7 @@
 
   <script>
     // Client-side JavaScript to fetch and display discussions
-document.addEventListener('DOMContentLoaded', async function() {
+    document.addEventListener('DOMContentLoaded', async function() {
   try {
     const response = await fetch('/api/discussions/fetch');
     if (!response.ok) {
@@ -355,9 +355,13 @@ document.addEventListener('DOMContentLoaded', async function() {
       const discussionHTML = `
         <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title">${discussion.title}, created by ${discussion.createdBy.firstname}</h5>
+            <h5 class="card-title">
+              <a href="/api/discussions/discussionDetails/${discussion._id}">
+                ${discussion.title}
+              </a>, 
+              created by ${discussion.createdBy.firstname}
+            </h5>
             <p class="card-text">${discussion.content}</p>
-            
           </div>
         </div>`;
       
@@ -367,6 +371,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     console.error('Error fetching discussions:', err);
   }
 });
+
 </script>
 </body>
 

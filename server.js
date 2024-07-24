@@ -16,7 +16,11 @@ const app = express();
  
 // Set the view engine to ejs
 app.set("view engine", "ejs");
- 
+
+// Serve static files
+app.use('/assets', express.static('assets'));
+app.use('/views', express.static('views'));
+
 // Configure session middleware
 app.use(
   session({
