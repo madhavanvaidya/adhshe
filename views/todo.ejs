@@ -274,7 +274,10 @@
           todos.forEach(todo => {
             const listItem = document.createElement('li');
             listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-            listItem.textContent = todo.text;
+            listItem.innerHTML = `
+              ${todo.text} 
+              <span class="badge bg-primary rounded-pill">${todo.timeSpent ? todo.timeSpent.toFixed(2) : 0} min</span>
+            `;
             listItem.dataset.id = todo._id;
             if (todo.completed) {
               listItem.style.textDecoration = 'line-through';

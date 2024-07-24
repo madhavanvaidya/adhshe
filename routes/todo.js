@@ -74,5 +74,26 @@ router.get('/summary', async (req, res) => {
   }
 });
 
+// Update task time spent
+router.put('/:id/time', async (req, res) => {
+  const { id } = req.params;
+  const { timeSpent } = req.body;
+
+  try {
+    const todo = await Todo.findById(id);
+    if (!todo) {
+      return res.status(404).send('Todo not found');
+    }
+
+    todo.timeSpent = (todo.timeSpent || 0) + timeSpent;
+    await todo.save();
+
+    res.send(todo);
+  } catch (error) {
+    res.status(500).send('Server error');
+  }
+});
+
+
 
 module.exports = router;
