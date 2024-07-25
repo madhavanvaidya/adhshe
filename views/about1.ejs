@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>To-Do List - ADHShe</title>
+  <title>About Us - ADHShe</title>
 
   <meta name="description" content="" />
 
@@ -28,7 +28,6 @@
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
   <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
   <!-- Page CSS -->
 
@@ -65,13 +64,13 @@
               <div data-i18n="Analytics">Dashboard</div>
             </a>
           </li>
-          <li class="menu-item">
-            <a href="/index" class="menu-link">
+          <li class="menu-item active">
+            <a href="/about1" class="menu-link">
               <i class="menu-icon tf-icons bx bxs-info-circle"></i>
               <div data-i18n="Analytics">About</div>
             </a>
           </li>
-          <li class="menu-item active">
+          <li class="menu-item">
             <a href="/todo" class="menu-link">
               <i class="menu-icon tf-icons bx bx-list-check"></i>
               <div data-i18n="Analytics">To-Do List</div>
@@ -186,29 +185,56 @@
           </div>
         </nav>
         <!-- / Navbar -->
-
-        <!-- Content wrapper -->
-        <div class="content-wrapper">
-          <!-- Content -->
-          <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
-              <div class="col-lg-8 mb-4 order-0">
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="row">
+            <div class="col-lg-12 mb-4 order-0">
                 <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title text-primary">To-Do List</h5>
-                    <form id="todo-form">
-                      <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="todo-input" placeholder="Enter a new to-do item" aria-label="Enter a new to-do item">
-                        <button class="btn btn-primary" type="submit">Add</button>
-                      </div>
-                    </form>
-                    <ul id="todo-list" class="list-group"></ul>
-                  </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">About ADHShe</h5>
+                        <div class="d-flex align-items-center m-4">
+                            <img src="../adhshe_icon.png" alt="FT Logo" class="rounded-circle" style="width: 200px; margin-bottom: 5%;">
+                            <p style="font-size: large;">Welcome to ADHShe, an innovative ADHD Health tracker developed by FrontEdge Technology. ADHShe is designed to provide comprehensive support for individuals managing ADHD symptoms, with a particular focus on women's health while remaining inclusive for all users. Our platform combines advanced technology with user-centered design principles to empower individuals in their ADHD management journey.</p>
+                        </div>
+                        
+                        <div>
+                            <h5 class="card-title text-primary">Our Mission</h5>
+                            <p>At ADHShe, our mission is to enhance the quality of life for individuals with ADHD by:</p>
+                            <ul>
+                                <li><strong>Empowering through Technology:</strong> Offering intuitive tools for symptom tracking, task management, and holistic well-being.</li>
+                                <li><strong>Promoting Awareness:</strong> Providing educational resources and insights to foster understanding and promote proactive care.</li>
+                                <li><strong>Building Community:</strong> Facilitating connections through our community forum where users can share experiences, seek advice, and provide support to one another.</li>
+                            </ul>
+                            
+                            <h5 class="card-title text-primary">Key Features</h5>
+                            <ul>
+                                <li><strong>Dashboard:</strong> Get a clear view of daily tasks, health metrics, and progress at a glance.</li>
+                                <li><strong>To-do List:</strong> Organize tasks efficiently to stay focused and productive.</li>
+                                <li><strong>Menstrual Cycle Tracker:</strong> Monitor cycle patterns and how they impact ADHD symptoms.</li>
+                                <li><strong>Pomodoro Timer:</strong> Enhance productivity with structured work and break intervals.</li>
+                                <li><strong>Mood Tracker:</strong> Log emotions to identify patterns and triggers affecting well-being.</li>
+                                <li><strong>Medication Tracker:</strong> Maintain medication schedules and track adherence easily.</li>
+                                <li><strong>Community Forum:</strong> Engage with a supportive community to share insights and experiences.</li>
+                            </ul>
+                            
+                            <h5 class="card-title text-primary">Join Us</h5>
+                            <p>Join ADHShe today to take control of your ADHD management journey. Whether you're looking for effective symptom tracking, community support, or educational resources, ADHShe is here to support you every step of the way.</p>
+                            
+                            <h5 class="card-title text-primary">Get Started</h5>
+                            <p>Experience the power of ADHShe and start managing your ADHD effectively. Sign up today and embark on a journey towards better health and well-being with FrontEdge Technology's innovative solution.</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <!-- / Content -->
+        </div>
+    </div>
+    <!-- / Content -->
+</div>
+<!-- / Content wrapper -->
+
+        <!-- / Content -->
 
           <!-- Footer -->
           <footer class="content-footer footer bg-footer-theme">
@@ -257,120 +283,6 @@
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const todoForm = document.getElementById('todo-form');
-      const todoInput = document.getElementById('todo-input');
-      const todoList = document.getElementById('todo-list');
-
-      // Fetch and display To-Do items
-      async function fetchTodos() {
-        try {
-          const response = await fetch('/api/todos');
-          const todos = await response.json();
-          todoList.innerHTML = '';
-          todos.forEach(todo => {
-            const listItem = document.createElement('li');
-            listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
-            listItem.innerHTML = `
-              ${todo.text} 
-              <span class="badge bg-primary rounded-pill">${todo.timeSpent ? todo.timeSpent.toFixed(2) : 0} min</span>
-            `;
-            listItem.dataset.id = todo._id;
-            if (todo.completed) {
-              listItem.style.textDecoration = 'line-through';
-            }
-            const deleteButton = document.createElement('button');
-            deleteButton.className = 'btn btn-danger btn-sm';
-            deleteButton.textContent = 'Delete';
-            deleteButton.addEventListener('click', () => deleteTodo(todo._id));
-            const toggleButton = document.createElement('button');
-            toggleButton.className = 'btn btn-secondary btn-sm me-2';
-            toggleButton.textContent = todo.completed ? 'Unmark' : 'Mark';
-            toggleButton.addEventListener('click', () => toggleTodoCompleted(todo._id, !todo.completed));
-            const buttonGroup = document.createElement('div');
-            buttonGroup.appendChild(toggleButton);
-            buttonGroup.appendChild(deleteButton);
-            listItem.appendChild(buttonGroup);
-            todoList.appendChild(listItem);
-          });
-        } catch (error) {
-          console.error('Error fetching todos:', error);
-        }
-      }
-
-      // Add a new To-Do item
-      todoForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const text = todoInput.value.trim();
-        if (!text) return;
-        try {
-          const response = await fetch('/api/todos', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ text })
-          });
-          if (response.ok) {
-            fetchTodos();
-            todoInput.value = '';
-            showToast('Task created successfully', 'success');
-          } else {
-            console.error('Error adding todo:', await response.json());
-          }
-        } catch (error) {
-          console.error('Error adding todo:', error);
-        }
-      });
-
-      // Delete a To-Do item
-      async function deleteTodo(id) {
-        try {
-          const response = await fetch(`/api/todos/${id}`, {
-            method: 'DELETE'
-          });
-          if (response.ok) {
-            fetchTodos();
-            showToast('Task deleted', 'error');
-          } else {
-            console.error('Error deleting todo:', await response.json());
-          }
-        } catch (error) {
-          console.error('Error deleting todo:', error);
-        }
-      }
-
-      // Toggle To-Do item completion
-      async function toggleTodoCompleted(id, completed) {
-        try {
-          const response = await fetch(`/api/todos/${id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ completed })
-          });
-          if (response.ok) {
-            fetchTodos();
-            showToast(completed ? 'Task completed' : 'Task unmarked', 'info');
-          } else {
-            console.error('Error updating todo:', await response.json());
-          }
-        } catch (error) {
-          console.error('Error updating todo:', error);
-        }
-      }
-
-      function showToast(message, type) {
-        toastr[type](message);
-      }
-
-      fetchTodos();
-    });
-  </script>
 </body>
 
 </html>

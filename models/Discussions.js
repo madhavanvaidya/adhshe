@@ -3,6 +3,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Define the schema for Response
+const responseSchema = new Schema({
+  text: {
+    type: String,
+    required: true
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  }
+}, { timestamps: true });
+
 // Define the schema for Discussion
 const discussionSchema = new Schema({
   title: {
@@ -17,7 +30,8 @@ const discussionSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
-  }
+  },
+  responses: [responseSchema]
 }, { timestamps: true });
 
 // Create a model based on the schema

@@ -16,7 +16,11 @@ const app = express();
  
 // Set the view engine to ejs
 app.set("view engine", "ejs");
- 
+
+// Serve static files
+app.use('/assets', express.static('assets'));
+app.use('/views', express.static('views'));
+
 // Configure session middleware
 app.use(
   session({
@@ -30,6 +34,13 @@ app.use(
   })
 );
  
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  // Other options as needed
+}));
+
 const port = process.env.PORT || 8000;
 const uri = process.env.MONGODB_URI; // Load MongoDB URI from .env file
  
@@ -57,7 +68,15 @@ function ensureAuthenticated(req, res, next) {
     res.redirect("/login"); // if no session, redirect to login page
   }
 }
- 
+
+const isAuthenticated = (req, res, next) => {
+  if (req.session.userId) { // Assuming you store userId in the session
+    next(); // User authenticated, proceed to next middleware
+  } else {
+    res.status(401).json({ msg: 'Unauthorized' }); // Not authenticated
+  }
+};
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
  
 // Routes
@@ -128,7 +147,12 @@ app.get("/todo", ensureAuthenticated, (req, res) => {
 app.get('/aboutus', ensureAuthenticated, (req, res) => {
   res.render('aboutus', { firstname: req.session.firstname, profileImage: req.session.profileImage });
 });
- 
+
+app.get('/about1', ensureAuthenticated, (req, res) => {
+  res.render('about1', { firstname: req.session.firstname, profileImage: req.session.profileImage });
+});
+
+
 // Profile route to render profile page with user data
 app.get('/profile', ensureAuthenticated, async (req, res) => {
   try {
@@ -194,4 +218,35 @@ app.get("/logout", (req, res) => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+});
+
+// Delete account endpoint
+app.post('/api/delete_account', isAuthenticated, async (req, res) => {
+  const userId = req.session.userId; // Get userId from session
+
+  try {
+    // Ensure the authenticated user is deleting their own account
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+
+    // Perform the deletion
+    await User.findByIdAndDelete(userId);
+
+    // Optionally, perform any additional cleanup or related deletions (e.g., user's posts, comments, etc.)
+
+    // Destroy session after deleting the account
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        return res.status(500).send('Server Error');
+      }
+      res.redirect('/login'); // Redirect to login page after successful deletion
+    });
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
