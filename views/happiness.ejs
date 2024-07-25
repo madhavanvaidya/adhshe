@@ -12,7 +12,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet" />
 
   <!-- Icons. Uncomment required icon fonts -->
   <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
@@ -234,6 +234,11 @@
                 width: 30%;
                 height: 200px;
               }
+              .mood-message {
+                font-size: 1.2rem;
+                margin-top: 1rem;
+                color: #555;
+              }
               select {
                 -webkit-appearance: none;
                 -moz-appearance: none;
@@ -247,134 +252,6 @@
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title text-primary">Mood Tracker</h5>
-                    <form id="happiness-form" class="happiness-form">
-                      <div class="form-group">
-                        <label for="mood" class="form-label">Mood:</label>
-                        <select id="mood" name="mood" class="form-control" required>
-                          <option value="Very Unpleasant">Very Unpleasant</option>
-                          <option value="Unpleasant">Unpleasant</option>
-                          <option value="Slightly Unpleasant">Slightly Unpleasant</option>
-                          <option value="Neutral">Neutral</option>
-                          <option value="Slightly Pleasant">Slightly Pleasant</option>
-                          <option value="Pleasant">Pleasant</option>
-                          <option value="Very Pleasant">Very Pleasant</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label for="feelings" class="form-label">What best describes this feeling? (You can choose more than one)</label>
-                        <div id="feelings" class="form-check-group">
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Amazed" class="form-check-input"> Amazed
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Amused" class="form-check-input"> Amused
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Angry" class="form-check-input"> Angry
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Annoyed" class="form-check-input"> Annoyed
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Anxious" class="form-check-input"> Anxious
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Ashamed" class="form-check-input"> Ashamed
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Brave" class="form-check-input"> Brave
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Calm" class="form-check-input"> Calm
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Confident" class="form-check-input"> Confident
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Content" class="form-check-input"> Content
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Disappointed" class="form-check-input"> Disappointed
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Discouraged" class="form-check-input"> Discouraged
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Disgusted" class="form-check-input"> Disgusted
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Drained" class="form-check-input"> Drained
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="feelings" value="Embarrassed" class="form-check-input"> Embarrassed
-                          </label>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="impact" class="form-label">What's having the biggest impact on you? (You can choose more than one)</label>
-                        <div id="impact" class="form-check-group">
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Health" class="form-check-input"> Health
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Hobbies" class="form-check-input"> Hobbies
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Fitness" class="form-check-input"> Fitness
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Identity" class="form-check-input"> Identity
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Self-Care" class="form-check-input"> Self-Care
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Spirituality" class="form-check-input"> Spirituality
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Community" class="form-check-input"> Community
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Partner" class="form-check-input"> Partner
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Family" class="form-check-input"> Family
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Dating" class="form-check-input"> Dating
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Friends" class="form-check-input"> Friends
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Tasks" class="form-check-input"> Tasks
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Weather" class="form-check-input"> Weather
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Work" class="form-check-input"> Work
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Education" class="form-check-input"> Education
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Current Events" class="form-check-input"> Current Events
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Travel" class="form-check-input"> Travel
-                          </label>
-                          <label class="form-check">
-                            <input type="checkbox" name="impact" value="Money" class="form-check-input"> Money
-                          </label>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="additionalContext" class="form-label">Additional Context:</label>
-                        <input type="text" id="additionalContext" name="additionalContext" class="form-control">
-                      </div>
-                      <button type="submit" class="btn btn-primary">Log Mood</button>
-                    </form>
                     <div class="calendar-container">
                       <div class="legend">
                         <div class="legend-item">
@@ -430,8 +307,134 @@
                             </div>
                           </div>
                         </div>
-                        <span class="fw-semibold d-block mb-1">Your Mood Entries</span>
-                        <ul id="happiness-entries" class="list-unstyled"></ul>
+                        <form id="happiness-form" class="happiness-form">
+                          <div class="form-group">
+                            <label for="mood" class="form-label">Mood:</label>
+                            <select id="mood" name="mood" class="form-control" required>
+                              <option value="Very Unpleasant">Very Unpleasant</option>
+                              <option value="Unpleasant">Unpleasant</option>
+                              <option value="Slightly Unpleasant">Slightly Unpleasant</option>
+                              <option value="Neutral">Neutral</option>
+                              <option value="Slightly Pleasant">Slightly Pleasant</option>
+                              <option value="Pleasant">Pleasant</option>
+                              <option value="Very Pleasant">Very Pleasant</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="feelings" class="form-label">What best describes this feeling? (You can choose more than one)</label>
+                            <div id="feelings" class="form-check-group">
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Amazed" class="form-check-input"> Amazed
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Amused" class="form-check-input"> Amused
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Angry" class="form-check-input"> Angry
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Annoyed" class="form-check-input"> Annoyed
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Anxious" class="form-check-input"> Anxious
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Ashamed" class="form-check-input"> Ashamed
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Brave" class="form-check-input"> Brave
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Calm" class="form-check-input"> Calm
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Confident" class="form-check-input"> Confident
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Content" class="form-check-input"> Content
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Disappointed" class="form-check-input"> Disappointed
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Discouraged" class="form-check-input"> Discouraged
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Disgusted" class="form-check-input"> Disgusted
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Drained" class="form-check-input"> Drained
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="feelings" value="Embarrassed" class="form-check-input"> Embarrassed
+                              </label>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="impact" class="form-label">What's having the biggest impact on you? (You can choose more than one)</label>
+                            <div id="impact" class="form-check-group">
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Health" class="form-check-input"> Health
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Hobbies" class="form-check-input"> Hobbies
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Fitness" class="form-check-input"> Fitness
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Identity" class="form-check-input"> Identity
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Self-Care" class="form-check-input"> Self-Care
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Spirituality" class="form-check-input"> Spirituality
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Community" class="form-check-input"> Community
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Partner" class="form-check-input"> Partner
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Family" class="form-check-input"> Family
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Dating" class="form-check-input"> Dating
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Friends" class="form-check-input"> Friends
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Tasks" class="form-check-input"> Tasks
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Weather" class="form-check-input"> Weather
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Work" class="form-check-input"> Work
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Education" class="form-check-input"> Education
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Current Events" class="form-check-input"> Current Events
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Travel" class="form-check-input"> Travel
+                              </label>
+                              <label class="form-check">
+                                <input type="checkbox" name="impact" value="Money" class="form-check-input"> Money
+                              </label>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="additionalContext" class="form-label">Additional Context:</label>
+                            <input type="text" id="additionalContext" name="additionalContext" class="form-control">
+                          </div>
+                          <button type="submit" class="btn btn-primary">Log Mood</button>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -439,14 +442,12 @@
               </div>
             </div>
             <div class="video-section">
-              <h2>Discover Uplifting Frequencies to Enhance Your Mood</h2>
-              <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/8M143iRrbgw" frameborder="0" allowfullscreen></iframe>
-                <iframe src="https://www.youtube.com/embed/IU13sdrLQ-M" frameborder="0" allowfullscreen></iframe>
-                <iframe src="https://www.youtube.com/embed/68aN9aOcmHw" frameborder="0" allowfullscreen></iframe>
-                <iframe src="https://www.youtube.com/embed/Op1rgjJAHb8" frameborder="0" allowfullscreen></iframe>
-                <iframe src="https://www.youtube.com/embed/Lpavrcr03gg" frameborder="0" allowfullscreen></iframe>
-                <iframe src="https://www.youtube.com/embed/SpzW3FbQeT4" frameborder="0" allowfullscreen></iframe>
+              <h2>Curated Tunes for Your Current Mood</h2>
+              <div class="mood-message" id="mood-message">
+                <!-- Personalized message will be displayed here -->
+              </div>
+              <div class="video-container" id="video-container">
+                <!-- YouTube video iframes will be inserted here based on the selected mood -->
               </div>
             </div>
           </div>
@@ -502,6 +503,54 @@
       "Very Pleasant": "#4db6ac"
     };
 
+    const moodVideos = {
+      "Very Unpleasant": [
+        "https://www.youtube.com/embed/Jyy0ra2WcQQ",
+        "https://www.youtube.com/embed/kag0aJqQsGo",
+        "https://www.youtube.com/embed/9uIk_91GQYI"
+      ],
+      "Unpleasant": [
+        "https://www.youtube.com/embed/lE6RYpe9IT0",
+        "https://www.youtube.com/embed/0Tmo3KIH31c",
+        "https://www.youtube.com/embed/j4OuCMnY43E"
+      ],
+      "Slightly Unpleasant": [
+        "https://www.youtube.com/embed/cJQQrI7nCeY",
+        "https://www.youtube.com/embed/neV3EPgvZ3g",
+        "https://www.youtube.com/embed/NJuSStkIZBg"
+      ],
+      "Neutral": [
+        "https://www.youtube.com/embed/1ZYbU82GVz4",
+        "https://www.youtube.com/embed/hlWiI4xVXKY",
+        "https://www.youtube.com/embed/ypQZV03l80g"
+      ],
+      "Slightly Pleasant": [
+        "https://www.youtube.com/embed/Nmmsl2X_--U",
+        "https://www.youtube.com/embed/_3Jy1wc8pOg",
+        "https://www.youtube.com/embed/5DiMoehAeOU"
+      ],
+      "Pleasant": [
+        "https://www.youtube.com/embed/WHPEKLQID4U",
+        "https://www.youtube.com/embed/qjzQt6YezTc",
+        "https://www.youtube.com/embed/bhOw4a5RoPw"
+      ],
+      "Very Pleasant": [
+        "https://www.youtube.com/embed/dXIyMS61B68",
+        "https://www.youtube.com/embed/I0kVNMHo6fQ",
+        "https://www.youtube.com/embed/QZbuj3RJcjI"
+      ]
+    };
+
+    const moodMessages = {
+      "Very Unpleasant": "It seems you're having a tough time. Here are some relaxing frequencies to help calm your mind.",
+      "Unpleasant": "Feeling down? These soothing sounds might help lift your spirits a bit.",
+      "Slightly Unpleasant": "A bit off? Try these frequencies to gently uplift your mood.",
+      "Neutral": "Everything's balanced. Enjoy these ambient tracks to maintain your steady state.",
+      "Slightly Pleasant": "Feeling good? These uplifting tunes can enhance your pleasant mood.",
+      "Pleasant": "You're in a great mood! These joyful sounds can keep you feeling happy.",
+      "Very Pleasant": "Feeling fantastic? Enjoy these bright and joyful frequencies!"
+    };
+
     let calendarEvents = [];
 
     document.getElementById('happiness-form').addEventListener('submit', async function(event) {
@@ -524,9 +573,10 @@
 
       if (response.ok) {
         const newEntry = await response.json();
-        addEntryToList(newEntry);
         addEntryToCalendar(newEntry);
         form.reset();
+        updateVideoSection(data.mood);
+        updateMoodMessage(data.mood);
       } else {
         alert('Failed to log mood entry.');
       }
@@ -537,24 +587,6 @@
       const entries = await response.json();
       calendarEvents = entries;
       updateCalendar();
-      updateEntriesList(entries.slice(0, 10));
-    }
-
-    function addEntryToList(entry) {
-      const entriesList = document.getElementById('happiness-entries');
-      const listItem = document.createElement('li');
-      listItem.className = 'entry';
-      listItem.textContent = `Date: ${new Date(entry.date).toLocaleString()}, Mood: ${entry.mood}, Feelings: ${entry.feelings.join(', ')}, Impact: ${entry.impact.join(', ')}, Additional Context: ${entry.additionalContext}`;
-      entriesList.prepend(listItem); // Add new entry to the top of the list
-      if (entriesList.children.length > 8) {
-        entriesList.removeChild(entriesList.lastChild); // Remove the last entry if there are more than 8 entries
-      }
-    }
-
-    function updateEntriesList(entries) {
-      const entriesList = document.getElementById('happiness-entries');
-      entriesList.innerHTML = '';
-      entries.forEach(entry => addEntryToList(entry));
     }
 
     function addEntryToCalendar(entry) {
@@ -564,7 +596,7 @@
         backgroundColor: moodColors[entry.mood],
         borderColor: moodColors[entry.mood],
         textColor: '#000',
-        description: `Feelings: ${entry.feelings.join(', ')}, Impact: ${entry.impact.join(', ')}, Additional Context: ${entry.additionalContext}`
+        description: `Mood: ${entry.mood}, Feelings: ${entry.feelings.join(', ')}, Impact: ${entry.impact.join(', ')}, Additional Context: ${entry.additionalContext}`
       }, true);  // The true argument ensures the event is added permanently to the calendar
 
       // Refetch events to ensure all views (month, week, day) are updated
@@ -574,6 +606,26 @@
     function updateCalendar() {
       $('#calendar').fullCalendar('removeEvents');
       calendarEvents.forEach(entry => addEntryToCalendar(entry));
+    }
+
+    function updateVideoSection(mood) {
+      const videoContainer = document.getElementById('video-container');
+      videoContainer.innerHTML = ''; // Clear existing videos
+
+      if (moodVideos[mood]) {
+        moodVideos[mood].forEach(videoUrl => {
+          const iframe = document.createElement('iframe');
+          iframe.src = videoUrl;
+          iframe.frameBorder = 0;
+          iframe.allowFullscreen = true;
+          videoContainer.appendChild(iframe);
+        });
+      }
+    }
+
+    function updateMoodMessage(mood) {
+      const moodMessageElement = document.getElementById('mood-message');
+      moodMessageElement.textContent = moodMessages[mood] || '';
     }
 
     $(document).ready(function() {
