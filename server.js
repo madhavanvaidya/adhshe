@@ -11,6 +11,7 @@ const discussionRoutes = require("./routes/discussions");
 const pomodoroRoutes = require('./routes/pomodoro');
 const happinessRoutes = require('./routes/happiness'); // Import happiness routes
 const User = require("./models/User"); // Import User model
+const fetch = require('node-fetch');
  
 const app = express();
  
@@ -127,6 +128,15 @@ app.get("/index", ensureAuthenticated, async (req, res) => {
     const summary = await response.json();
     const { total, completed } = summary;
     const completionPercentage = total > 0 ? (completed / total) * 100 : 0;
+
+    const moodResponse = await fetch(`http://localhost:${port}/happiness/fetch`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: req.headers.cookie,
+      },
+    });
+    const moodData = await moodResponse.json();
  
     res.render("index", {
       firstname: req.session.firstname,
@@ -134,6 +144,7 @@ app.get("/index", ensureAuthenticated, async (req, res) => {
       totalTasks: total,
       completedTasks: completed,
       completionPercentage: completionPercentage,
+      moodData: moodData,
     });
   } catch (err) {
     res.status(500).send("Error fetching tasks summary");

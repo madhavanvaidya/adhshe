@@ -195,7 +195,7 @@
                       <% if (discussion.responses && discussion.responses.length > 0) { %>
                         <% discussion.responses.forEach(function(response) { %>
                           <li class="list-group-item">
-                            <p><strong><%= response.user.firstname %> <%= response.user.lastname %>:</strong> <%= response.text %></p>
+                            <p><strong><%= response.user.firstname && response.user.lastname ? response.user.firstname + ' ' + response.user.lastname : 'Anonymous' %>:</strong> <%= response.text %></p>
                             <small>Posted on <%= new Date(response.createdAt).toDateString() %></small>
                           </li>
                         <% }); %>

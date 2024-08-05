@@ -37,4 +37,14 @@ router.get('/entries', async (req, res) => {
   }
 });
 
+// Fetch mood data for a user
+router.get('/fetch', async (req, res) => {
+  try {
+    const userId = req.session.userId;
+    const moodData = await Happiness.find({ userId }).sort({ date: 1 });
+    res.json(moodData);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 module.exports = router;
