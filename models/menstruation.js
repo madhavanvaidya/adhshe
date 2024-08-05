@@ -1,4 +1,4 @@
-models : const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const MenstrualCycleSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, required: true },
