@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const MenstrualCycle = require('../models/MenstruationCycle'); // Adjust the path as necessary
+const MenstrualCycle = require('../models/MenstrualCycle'); 
 
 // GET all menstrual cycles
 router.get('/', async (req, res) => {
