@@ -39,13 +39,28 @@
  
   <!-- Helpers -->
   <script src="../assets/vendor/js/helpers.js"></script>
-
+ 
   <!-- Include Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
  
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../assets/js/config.js"></script>
+  <style>
+    .card {
+      height: 100%;
+    }
+    .equal-height {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .equal-height > .col {
+      display: flex;
+    }
+    .equal-height > .col > .card {
+      flex: 1;
+    }
+  </style>
 </head>
  
 <body>
@@ -79,12 +94,6 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="/about1" class="menu-link">
-              <i class="menu-icon tf-icons bx bxs-info-circle"></i>
-              <div data-i18n="Analytics">About</div>
-            </a>
-          </li>
-          <li class="menu-item">
             <a href="/todo" class="menu-link">
               <i class="menu-icon tf-icons bx bx-list-check"></i>
               <div data-i18n="Analytics">To-Do List</div>
@@ -109,17 +118,24 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="/aboutus" class="menu-link">
-              <i class="menu-icon tf-icons bx bxs-store"></i>
-              <div data-i18n="Analytics">Meet the developers</div>
-            </a>
-          </li>
-          <li class="menu-item">
             <a href="/happiness" class="menu-link">
               <i class="menu-icon tf-icons bx bx-smile"></i>
               <div data-i18n="Analytics">Mood Tracker</div>
             </a>
           </li>
+          <li class="menu-item">
+            <a href="/about1" class="menu-link">
+              <i class="menu-icon tf-icons bx bxs-info-circle"></i>
+              <div data-i18n="Analytics">About</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="/aboutus" class="menu-link">
+              <i class="menu-icon tf-icons bx bxs-store"></i>
+              <div data-i18n="Analytics">Meet the developers</div>
+            </a>
+          </li>
+         
         </ul>
       </aside>
       <!-- / Menu -->
@@ -141,9 +157,7 @@
             <!-- Search -->
             <div class="navbar-nav align-items-center">
               <div class="nav-item d-flex align-items-center">
-                <i class="bx bx-search fs-4 lh-0"></i>
-                <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                  aria-label="Search..." />
+                <span class="ms-2 text-primary fs-5 fw-bold">We help people with ADHD</span>
               </div>
             </div>
             <!-- /Search -->
@@ -162,7 +176,7 @@
                       class="w-px-40 h-auto rounded-circle"
                     />
                   </div>
-                  
+                 
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li>
@@ -207,165 +221,55 @@
         <!-- Content wrapper -->
         <div class="content-wrapper">
           <!-- Content -->
- 
-          <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
-              <div class="col-lg-8 mb-4 order-0">
-                <div class="card">
-                  <div class="d-flex align-items-end row">
-                    <div class="col-sm-7">
-                      <div class="card-body">
-                        <h5 class="card-title text-primary">Congratulations Jane!</h5>
-                        <p class="mb-4">
-                          You have been <span class="fw-bold">72%</span> more productive today!
-                        </p>
- 
-                        <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Progress</a>
-                      </div>
-                    </div>
-                    <div class="col-sm-5 text-center text-sm-left">
-                      <div class="card-body pb-0 px-0 px-md-4">
-                        <img src="../assets/img/illustrations/girl-doing-yoga-light.png" height="140"
-                          alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                          data-app-light-img="illustrations/man-with-laptop-light.png" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+      <!-- Congratulations and Tasks Progress Chart -->
+      <div class="col-lg-8 mb-4 order-0">
+        <div class="card" style="height: fit-content; padding-bottom: 15px;">
+          <div class="d-flex align-items-end row">
+            <div class="col-sm-7">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Congratulations <%= firstname %>!</h5>
+                <p class="mb-4">
+                  You have been <span class="fw-bold"><small class="text-success fw-semibold"></i><%= completionPercentage %>%</small></span> productive today!
+                </p>
+                <a href="/todo" class="btn btn-sm btn-outline-primary">View Progress</a>
               </div>
-              <div class="col-lg-4 col-md-4 order-1">
-                <div class="row">
-                  <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="card-title d-flex align-items-start justify-content-between">
-                          <div class="avatar flex-shrink-0">
-                            <span class="badge bg-label-primary p-2"><i class="bx bx-task text-primary"></i></span>
-                          </div>
-                          <div class="dropdown">
-                            <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
-                              aria-haspopup="true" aria-expanded="false">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                              <a class="dropdown-item" href="/todo">View More</a>
-                            </div>
-                          </div>
-                        </div>
-                        <span class="fw-semibold d-block mb-1">Tasks</span>
-                        <h3 class="card-title mb-2"><%= completedTasks %> / <%= totalTasks %></h3>
-                        <small class="text-success fw-semibold"></i> Completed <%= completionPercentage %>% tasks</small>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-12 col-6 mb-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="card-title d-flex align-items-start justify-content-between">
-                          <div class="avatar flex-shrink-0">
-                            <span class="badge bg-label-success p-2"><i class="bx bx-dish text-success"></i></span>
-                          </div>
-                          <div class="dropdown">
-                            <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
-                              aria-haspopup="true" aria-expanded="false">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                              <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                              <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                            </div>
-                          </div>
-                        </div>
-                        <span class="fw-semibold d-block mb-1">Diet</span>
-                        <h3 class="card-title text-nowrap mb-1">2245 cal</h3>
-                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Total Revenue -->
-              <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-                <div class="card">
-                  <!-- Mood Chart -->
-          <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
-              <div class="col-lg-12 mb-4">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Happiness Report</h5>
-                    <canvas id="moodChart"></canvas>
-                  </div>
-                </div>
+            </div>
+            <div class="col-sm-5 text-center text-sm-left">
+              <div class="card-body pb-0 px-0 px-md-4">
+                <img src="../assets/img/illustrations/girl-doing-yoga-light.png" height="140"
+                  alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                  data-app-light-img="illustrations/man-with-laptop-light.png" />
               </div>
             </div>
           </div>
-          <!-- / Mood Chart -->
-                  </div>
-                </div>
-              </div>
-              <!--/ Total Revenue -->
-              <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-                <div class="row">
-                  <div class="col-6 mb-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="card-title d-flex align-items-start justify-content-between">
-                          <div class="avatar flex-shrink-0">
-                            <span class="badge bg-label-danger p-2"><i class="bx bx-desktop text-danger"></i></span>
-                          </div>
-                          <div class="dropdown">
-                            <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown"
-                              aria-haspopup="true" aria-expanded="false">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                              <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                              <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                            </div>
-                          </div>
-                        </div>
-                        <span class="fw-semibold d-block mb-1">Screen Time</span>
-                        <h3 class="card-title text-nowrap mb-2">3.5 Hours</h3>
-                        <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6 mb-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="card-title d-flex align-items-start justify-content-between">
-                          <div class="avatar flex-shrink-0">
-                            <span class="badge bg-label-warning p-2"><i class="bx bxs-bell-ring text-warning"></i></span>
-                          </div>
-                          <div class="dropdown">
-                            <button class="btn p-0" type="button" id="cardOpt1" data-bs-toggle="dropdown"
-                              aria-haspopup="true" aria-expanded="false">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                              <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                              <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                            </div>
-                          </div>
-                        </div>
-                        <span class="fw-semibold d-block mb-1">Alarm Raised</span>
-                        <h3 class="card-title mb-2">6 Times</h3>
-                        <small class="text-success fw-semibold"><i class="bx bx-down-arrow-alt"></i> -28.14%</small>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- </div>
-    <div class="row"> -->
-                </div>
-              </div>
-            </div>
-            <div class="row">
- 
-              <!--/ Transactions -->
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4 order-1">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Tasks Progress</h5>
+            <div style="position: relative; height: 200px;">
+              <canvas id="tasksProgressChart"></canvas>
             </div>
           </div>
-          <!-- / Content -->
+        </div>
+      </div>
+
+      <!-- Mood Chart -->
+      <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Happiness Report</h5>
+            <canvas id="moodChart" width="400" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / Content -->
  
           <!-- Footer -->
           <footer class="content-footer footer bg-footer-theme">
@@ -416,11 +320,22 @@
  
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-
+ 
   <script>
-    document.addEventListener('DOMContentLoaded', async function() {
-      // Assuming moodData is passed from the server and available here
+    document.addEventListener('DOMContentLoaded', function() {
+      // Destroy existing charts if they exist
+      if (window.moodChart && typeof window.moodChart.destroy === 'function') {
+        window.moodChart.destroy();
+      }
+      if (window.tasksProgressChart && typeof window.tasksProgressChart.destroy === 'function') {
+        window.tasksProgressChart.destroy();
+      }
+  
+      // Assuming moodData, totalTasks, and completedTasks are passed from the server and available here
       const moodData = <%- JSON.stringify(moodData) %>;
+      const totalTasks = <%= totalTasks %>;
+      const completedTasks = <%= completedTasks %>;
+      const uncompletedTasks = totalTasks - completedTasks;
   
       // Map mood selections to numerical values
       const moodMap = {
@@ -436,9 +351,9 @@
       const dates = moodData.map(entry => new Date(entry.date).toLocaleDateString());
       const moods = moodData.map(entry => moodMap[entry.mood]);
   
-      // Create the chart
-      const ctx = document.getElementById('moodChart').getContext('2d');
-      const moodChart = new Chart(ctx, {
+      // Create the mood chart
+      const moodCtx = document.getElementById('moodChart').getContext('2d');
+      window.moodChart = new Chart(moodCtx, {
         type: 'line',
         data: {
           labels: dates,
@@ -457,8 +372,49 @@
               min: 1,
               max: 7,
               ticks: {
-                callback: function(value, index, values) {
+                callback: function(value) {
                   return Object.keys(moodMap).find(key => moodMap[key] === value);
+                }
+              }
+            }
+          }
+        }
+      });
+  
+      // Create the tasks progress chart with blue accents and aligned legend
+      const tasksCtx = document.getElementById('tasksProgressChart').getContext('2d');
+      window.tasksProgressChart = new Chart(tasksCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Completed Tasks', 'Uncompleted Tasks'],
+          datasets: [{
+            data: [completedTasks, uncompletedTasks],
+            backgroundColor: ['#007bff', '#6c757d'],
+            hoverBackgroundColor: ['#0056b3', '#5a6268'],
+            borderColor: ['#ffffff', '#ffffff'],
+            borderWidth: 2,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              position: 'right',
+              align: 'start',
+              labels: {
+                boxWidth: 20,
+                padding: 15,
+                color: '#007bff'
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(tooltipItem) {
+                  const total = completedTasks + uncompletedTasks;
+                  const percentage = ((tooltipItem.raw / total) * 100).toFixed(2);
+                  return `${tooltipItem.label}: ${tooltipItem.raw} (${percentage}%)`;
                 }
               }
             }
@@ -467,8 +423,11 @@
       });
     });
   </script>
-  
 
+
+
+ 
+ 
 </body>
  
 </html>
