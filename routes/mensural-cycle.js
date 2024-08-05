@@ -1,4 +1,3 @@
-// routes/menstrualCycle.js
 const express = require('express');
 const router = express.Router();
 const MenstrualCycle = require('../models/MenstrualCycle');
@@ -28,11 +27,13 @@ router.get('/', ensureAuthenticated, async (req, res) => {
 
 // Add new cycle data
 router.post('/', ensureAuthenticated, async (req, res) => {
-  const { startDate, cycleLength } = req.body;
+  const { startDate, cycleLength, symptoms } = req.body;
+  const selectedSymptoms = symptoms ? symptoms : []; // Checkboxes will return an array
   const cycle = new MenstrualCycle({
     userId: req.session.userId,
     startDate: new Date(startDate),
-    cycleLength: parseInt(cycleLength)
+    cycleLength: parseInt(cycleLength),
+    symptoms: selectedSymptoms
   });
 
   try {
@@ -44,4 +45,3 @@ router.post('/', ensureAuthenticated, async (req, res) => {
 });
 
 module.exports = router;
-
