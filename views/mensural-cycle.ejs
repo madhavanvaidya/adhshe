@@ -1,83 +1,333 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
 <head>
-  <title>Menstrual Cycle Tracker</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+  <title>Menstrual Cycle Tracker - ADHShe</title>
+  <meta name="description" content="" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../adhshe_icon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="../assets/css/demo.css" />
+
+  <!-- Vendors CSS -->
+  <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+
+  <!-- Helpers -->
+  <script src="../assets/vendor/js/helpers.js"></script>
+  <script src="../assets/js/config.js"></script>
+
+  <style>
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .form-check-label {
+      margin-right: 1rem;
+    }
+    .form-check {
+      display: inline-block;
+      margin-right: 1rem;
+    }
+    .entries-list {
+      margin-top: 2rem;
+    }
+    .entry {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .cycle-section {
+      margin-bottom: 2rem;
+    }
+    .cycle-form button {
+      margin-top: 1rem;
+    }
+    .suggestions-container {
+      margin-top: 2rem;
+    }
+    .suggestion-item {
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f4f4f4;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome, <%= firstname %></h1>
-  <img src="<%= profileImage %>" alt="Profile Image" />
+  <!-- Layout wrapper -->
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+      <!-- Menu -->
+      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <!-- Content as before -->
+      </aside>
+      <!-- / Menu -->
+      
+      <!-- Layout container -->
+      <div class="layout-page">
+        <!-- Navbar -->
+        <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
+          <!-- Content as before -->
+        </nav>
+        <!-- / Navbar -->
+        
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
+          <!-- Content -->
+          <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row">
+              <div class="col-lg-8 mb-4 order-0">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">Menstrual Cycle Tracker</h5>
+                    <form id="cycle-form" class="cycle-form">
+                      <div class="form-group">
+                        <label for="cycleStartDate" class="form-label">Cycle Start Date:</label>
+                        <input type="date" id="cycleStartDate" name="cycleStartDate" class="form-control" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="cycleLength" class="form-label">Cycle Length (days):</label>
+                        <input type="number" id="cycleLength" name="cycleLength" class="form-control" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="symptoms" class="form-label">Symptoms (Select all that apply):</label>
+                        <div id="symptoms" class="form-check-group">
+                          <label class="form-check">
+                            <input type="checkbox" name="symptoms" value="Cramping" class="form-check-input"> Cramping
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="symptoms" value="Bloating" class="form-check-input"> Bloating
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="symptoms" value="Headache" class="form-check-input"> Headache
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="symptoms" value="Mood Swings" class="form-check-input"> Mood Swings
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="symptoms" value="Fatigue" class="form-check-input"> Fatigue
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="symptoms" value="Breast Tenderness" class="form-check-input"> Breast Tenderness
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="symptoms" value="Acne" class="form-check-input"> Acne
+                          </label>
+                          <label class="form-check">
+                            <input type="checkbox" name="symptoms" value="Other" class="form-check-input"> Other
+                          </label>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Track Cycle</button>
+                    </form>
+                    <div class="suggestions-container" id="suggestions-container">
+                      <!-- Suggestions based on symptoms will be displayed here -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- / Content -->
+          
+          <!-- Footer -->
+          <footer class="content-footer footer bg-footer-theme">
+            <!-- Content as before -->
+          </footer>
+          <!-- / Footer -->
+          
+          <div class="content-backdrop fade"></div>
+        </div>
+        <!-- / Content wrapper -->
+      </div>
+      <!-- / Layout page -->
+    </div>
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+  </div>
 
-  <form id="tracker-form" action="/menstrualCycle" method="POST">
-    <label for="start-date">Start Date:</label>
-    <input type="date" id="start-date" name="startDate" required />
-    
-    <label for="cycle-length">Cycle Length (days):</label>
-    <input type="number" id="cycle-length" name="cycleLength" required />
-
-    <fieldset>
-      <legend>Symptoms:</legend>
-      <label><input type="checkbox" name="symptoms" value="cramps"> Cramps</label>
-      <label><input type="checkbox" name="symptoms" value="headache"> Headache</label>
-      <label><input type="checkbox" name="symptoms" value="fatigue"> Fatigue</label>
-      <label><input type="checkbox" name="symptoms" value="bloating"> Bloating</label>
-      <label><input type="checkbox" name="symptoms" value="mood swings"> Mood Swings</label>
-      <!-- Add more symptoms as needed -->
-    </fieldset>
-    
-    <button type="submit">Log Cycle</button>
-  </form>
-
-  <ul id="cycle-list">
-    <% cycles.forEach((cycle, index) => { %>
-      <li>
-        Cycle <%= index + 1 %>: Start Date - <%= cycle.startDate.toDateString() %>, 
-        Cycle Length - <%= cycle.cycleLength %> days,
-        Symptoms - <%= cycle.symptoms.join(', ') %>
-        <br/>
-        Suggestions: 
-        <ul>
-          <% cycle.symptoms.forEach(symptom => { %>
-            <li>
-              <%= getSuggestions(symptom) %>
-            </li>
-          <% }) %>
-        </ul>
-      </li>
-    <% }); %>
-  </ul>
-
-  <p id="average-cycle-length">
-    Average Cycle Length: 
-    <%= (cycles.reduce((sum, cycle) => sum + cycle.cycleLength, 0) / cycles.length).toFixed(2) %> days
-  </p>
-  <p id="next-period-date">
-    Next Expected Period Date: 
-    <%= new Date(cycles[cycles.length - 1].startDate).setDate(
-          new Date(cycles[cycles.length - 1].startDate).getDate() + 
-          (cycles.reduce((sum, cycle) => sum + cycle.cycleLength, 0) / cycles.length)
-        ).toDateString() %>
-  </p>
-
+  <!-- Core JS -->
+  <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="../assets/vendor/libs/popper/popper.js"></script>
+  <script src="../assets/vendor/js/bootstrap.js"></script>
+  <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="../assets/vendor/js/menu.js"></script>
+  <!-- endbuild -->
+  
+  <!-- Vendors JS -->
+  <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+  
+  <!-- Main JS -->
+  <script src="../assets/js/main.js"></script>
+  
+  <!-- Page JS -->
+  <script src="../assets/js/dashboards-analytics.js"></script>
+  
+  <!-- FullCalendar JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+  
   <script>
-    function getSuggestions(symptom) {
-      const suggestions = {
-        cramps: 'Try drinking herbal tea and using a heating pad.',
-        headache: 'Stay hydrated and consider a light snack.',
-        fatigue: 'Take short naps and maintain a balanced diet.',
-        bloating: 'Avoid salty foods and stay hydrated.',
-        'mood swings': 'Practice mindfulness and get regular exercise.',
-        // Add more symptoms and suggestions as needed
-      };
-      return suggestions[symptom] || 'No specific suggestions available.';
+    const symptomSuggestions = {
+      "Cramping": [
+        "Try using a heating pad to ease cramps.",
+        "Consider gentle exercise like walking or yoga."
+      ],
+      "Bloating": [
+        "Drink plenty of water to stay hydrated.",
+        "Avoid salty foods and consider herbal teas."
+      ],
+      "Headache": [
+        "Rest in a quiet, dark room.",
+        "Stay hydrated and consider taking a break from screens."
+      ],
+      "Mood Swings": [
+        "Practice mindfulness or deep breathing exercises.",
+        "Engage in activities that make you happy or relaxed."
+      ],
+      "Fatigue": [
+        "Ensure you're getting enough sleep.",
+        "Consider gentle, restorative exercises or a short nap."
+      ],
+      "Breast Tenderness": [
+        "Wear a well-fitting bra for support.",
+        "Consider reducing caffeine intake."
+      ],
+      "Acne": [
+        "Maintain a consistent skincare routine.",
+        "Avoid touching your face frequently."
+      ],
+      "Other": [
+        "Consult with a healthcare professional for personalized advice."
+      ]
+   
+    };
+
+    document.getElementById('cycle-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const symptoms = Array.from(document.querySelectorAll('input[name="symptoms"]:checked'))
+                            .map(input => input.value);
+
+      const suggestionsContainer = document.getElementById('suggestions-container');
+      suggestionsContainer.innerHTML = '';
+
+      symptoms.forEach(symptom => {
+        if (symptomSuggestions[symptom]) {
+          const suggestions = symptomSuggestions[symptom];
+          suggestions.forEach(suggestion => {
+            const suggestionItem = document.createElement('div');
+            suggestionItem.className = 'suggestion-item';
+            suggestionItem.textContent = suggestion;
+            suggestionsContainer.appendChild(suggestionItem);
+          });
+        }
+      });
+
+      if (symptoms.length === 0) {
+        const noSymptomMessage = document.createElement('div');
+        noSymptomMessage.className = 'suggestion-item';
+        noSymptomMessage.textContent = 'No symptoms selected. Please select symptoms to get suggestions.';
+        suggestionsContainer.appendChild(noSymptomMessage);
+      }
+    });
+
+    let calendarEvents = [];
+
+    function addCycleEntryToCalendar(entry) {
+      $('#calendar').fullCalendar('renderEvent', {
+        title: `Cycle Start: ${entry.cycleStartDate}`,
+        start: new Date(entry.cycleStartDate),
+        backgroundColor: '#ff9999',
+        borderColor: '#ff9999',
+        textColor: '#000',
+        description: `Mood: ${entry.cycleMood}, Symptoms: ${entry.symptoms.join(', ')}`
+      }, true);
+
+      $('#calendar').fullCalendar('refetchEvents');
     }
 
-    document.getElementById('tracker-form').addEventListener('submit', function(event) {
-      const cycleLength = parseInt(document.getElementById('cycle-length').value);
-      if (isNaN(cycleLength) || cycleLength <= 0) {
-        alert('Please enter a valid cycle length.');
-        event.preventDefault();
+    function updateCalendar() {
+      $('#calendar').fullCalendar('removeEvents');
+      calendarEvents.forEach(entry => addCycleEntryToCalendar(entry));
+    }
+
+    async function fetchCycleEntries() {
+      const response = await fetch('/cycle/entries');
+      const entries = await response.json();
+      calendarEvents = entries;
+      updateCalendar();
+    }
+
+    document.getElementById('cycle-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const form = event.target;
+      const data = {
+        cycleStartDate: form.cycleStartDate.value,
+        symptoms: Array.from(form.symptoms.selectedOptions).map(option => option.value),
+        cycleMood: form.cycleMood.value
+      };
+
+      const response = await fetch('/cycle/log', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        const newEntry = await response.json();
+        addCycleEntryToCalendar(newEntry);
+        form.reset();
+      } else {
+        alert('Failed to log cycle data.');
       }
+    });
+
+    $(document).ready(function() {
+      $('#calendar').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        editable: false,
+        events: [],
+        eventRender: function(event, element) {
+          if (event.description) {
+            element.find('.fc-title').append(`<div class="fc-description">${event.description}</div>`);
+            element.attr('title', event.description);
+          }
+        },
+        viewRender: function(view) {
+          updateCalendar();
+        }
+      });
+
+      fetchCycleEntries();
     });
   </script>
 </body>
