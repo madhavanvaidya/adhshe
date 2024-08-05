@@ -14,20 +14,64 @@
     
     <label for="cycle-length">Cycle Length (days):</label>
     <input type="number" id="cycle-length" name="cycleLength" required />
+
+    <fieldset>
+      <legend>Symptoms:</legend>
+      <label><input type="checkbox" name="symptoms" value="cramps"> Cramps</label>
+      <label><input type="checkbox" name="symptoms" value="headache"> Headache</label>
+      <label><input type="checkbox" name="symptoms" value="fatigue"> Fatigue</label>
+      <label><input type="checkbox" name="symptoms" value="bloating"> Bloating</label>
+      <label><input type="checkbox" name="symptoms" value="mood swings"> Mood Swings</label>
+      <!-- Add more symptoms as needed -->
+    </fieldset>
     
     <button type="submit">Log Cycle</button>
   </form>
 
   <ul id="cycle-list">
     <% cycles.forEach((cycle, index) => { %>
-      <li>Cycle <%= index + 1 %>: Start Date - <%= cycle.startDate.toDateString() %>, Cycle Length - <%= cycle.cycleLength %> days</li>
+      <li>
+        Cycle <%= index + 1 %>: Start Date - <%= cycle.startDate.toDateString() %>, 
+        Cycle Length - <%= cycle.cycleLength %> days,
+        Symptoms - <%= cycle.symptoms.join(', ') %>
+        <br/>
+        Suggestions: 
+        <ul>
+          <% cycle.symptoms.forEach(symptom => { %>
+            <li>
+              <%= getSuggestions(symptom) %>
+            </li>
+          <% }) %>
+        </ul>
+      </li>
     <% }); %>
   </ul>
 
-  <p id="average-cycle-length">Average Cycle Length: <%= (cycles.reduce((sum, cycle) => sum + cycle.cycleLength, 0) / cycles.length).toFixed(2) %> days</p>
-  <p id="next-period-date">Next Expected Period Date: <%= new Date(cycles[cycles.length - 1].startDate).setDate(new Date(cycles[cycles.length - 1].startDate).getDate() + (cycles.reduce((sum, cycle) => sum + cycle.cycleLength, 0) / cycles.length)).toDateString() %></p>
+  <p id="average-cycle-length">
+    Average Cycle Length: 
+    <%= (cycles.reduce((sum, cycle) => sum + cycle.cycleLength, 0) / cycles.length).toFixed(2) %> days
+  </p>
+  <p id="next-period-date">
+    Next Expected Period Date: 
+    <%= new Date(cycles[cycles.length - 1].startDate).setDate(
+          new Date(cycles[cycles.length - 1].startDate).getDate() + 
+          (cycles.reduce((sum, cycle) => sum + cycle.cycleLength, 0) / cycles.length)
+        ).toDateString() %>
+  </p>
 
   <script>
+    function getSuggestions(symptom) {
+      const suggestions = {
+        cramps: 'Try drinking herbal tea and using a heating pad.',
+        headache: 'Stay hydrated and consider a light snack.',
+        fatigue: 'Take short naps and maintain a balanced diet.',
+        bloating: 'Avoid salty foods and stay hydrated.',
+        'mood swings': 'Practice mindfulness and get regular exercise.',
+        // Add more symptoms and suggestions as needed
+      };
+      return suggestions[symptom] || 'No specific suggestions available.';
+    }
+
     document.getElementById('tracker-form').addEventListener('submit', function(event) {
       const cycleLength = parseInt(document.getElementById('cycle-length').value);
       if (isNaN(cycleLength) || cycleLength <= 0) {
@@ -38,4 +82,3 @@
   </script>
 </body>
 </html>
-
