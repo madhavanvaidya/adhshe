@@ -10,6 +10,7 @@ const todoRoutes = require("./routes/todo");
 const discussionRoutes = require("./routes/discussions");
 const pomodoroRoutes = require('./routes/pomodoro');
 const happinessRoutes = require('./routes/happiness'); // Import happiness routes
+const menstrualCycleRoutes = require('./routes/menstrualCycle'); // Import menstrual cycle routes
 const User = require("./models/User"); // Import User model
 const fetch = require('node-fetch');
  
@@ -89,7 +90,8 @@ app.use("/api", userRoutes);
 app.use("/api/todos", ensureAuthenticated, todoRoutes);
 app.use("/api/discussions", ensureAuthenticated, discussionRoutes);
 app.use('/happiness', ensureAuthenticated, happinessRoutes); // Add happiness routes
- 
+app.use('/menstrualCycle', ensureAuthenticated, menstrualCycleRoutes); // Add menstrual cycle routes
+
 // MongoDB connection
 mongoose
   .connect(uri, {
