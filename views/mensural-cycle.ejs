@@ -102,6 +102,8 @@
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title text-primary">Menstrual Cycle Tracker</h5>
+                    
+                    <!-- Form for adding new cycle data -->
                     <form id="cycle-form" class="cycle-form">
                       <div class="form-group">
                         <label for="cycleStartDate" class="form-label">Cycle Start Date:</label>
@@ -142,9 +144,25 @@
                       </div>
                       <button type="submit" class="btn btn-primary">Track Cycle</button>
                     </form>
+
+                    <!-- Suggestions based on symptoms -->
                     <div class="suggestions-container" id="suggestions-container">
                       <!-- Suggestions based on symptoms will be displayed here -->
                     </div>
+
+                    <!-- Displaying cycle entries -->
+                    <section id="cycle-entries" class="entries-list">
+                      <h2>Your Cycle Entries</h2>
+                      <% cycles.forEach(cycle => { %>
+                        <div class="entry">
+                          <p><strong>Start Date:</strong> <%= cycle.startDate.toDateString() %></p>
+                          <p><strong>Cycle Length:</strong> <%= cycle.cycleLength %> days</p>
+                          <p><strong>Mood:</strong> <%= cycle.mood %></p>
+                          <p><strong>Symptoms:</strong> <%= cycle.symptoms.join(', ') %></p>
+                        </div>
+                      <% }); %>
+                    </section>
+
                   </div>
                 </div>
               </div>
@@ -193,6 +211,7 @@
     const symptomSuggestions = {
       "Cramping": [
         "Try using a heating pad to ease cramps.",
+        "Consider gentle exercise like
         "Consider gentle exercise like walking or yoga."
       ],
       "Bloating": [
@@ -222,7 +241,6 @@
       "Other": [
         "Consult with a healthcare professional for personalized advice."
       ]
-   
     };
 
     document.getElementById('cycle-form').addEventListener('submit', function(event) {
@@ -332,3 +350,4 @@
   </script>
 </body>
 </html>
+
