@@ -283,7 +283,7 @@
       // Fetch and display menstrual cycles
       async function fetchCycles() {
         try {
-          const response = await fetch('/api/menstrual-cycles');
+          const response = await fetch('/api/MenstrualCycle');
           const cycles = await response.json();
           list.innerHTML = '';
           cycles.forEach(cycle => {
@@ -318,7 +318,7 @@
         const symptoms = symptomsInput.value.split(',').map(s => s.trim());
         const mood = moodInput.value;
         try {
-          const response = await fetch('/api/menstrual-cycles', {
+          const response = await fetch('/api/MenstrualCycle', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -340,7 +340,7 @@
       // Delete a menstrual cycle
       async function deleteCycle(id) {
         try {
-          const response = await fetch(`/api/menstrual-cycles/${id}`, {
+          const response = await fetch(`/api/MenstrualCycle/${id}`, {
             method: 'DELETE'
           });
           if (response.ok) {
