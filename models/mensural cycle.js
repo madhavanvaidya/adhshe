@@ -8,4 +8,7 @@ const MenstrualCycleSchema = new mongoose.Schema({
   mood: { type: String, required: true } // Mood field
 });
 
+// Adding indexes
+MenstrualCycleSchema.index({ userId: 1, startDate: -1 });
+
 module.exports = mongoose.model('MenstrualCycle', MenstrualCycleSchema);
