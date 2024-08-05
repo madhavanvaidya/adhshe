@@ -27,13 +27,15 @@ router.get('/', ensureAuthenticated, async (req, res) => {
 
 // Add new cycle data
 router.post('/', ensureAuthenticated, async (req, res) => {
-  const { startDate, cycleLength, symptoms } = req.body;
+  const { startDate, cycleLength, symptoms, mood } = req.body;
   const selectedSymptoms = symptoms ? symptoms : []; // Checkboxes will return an array
+
   const cycle = new MenstrualCycle({
     userId: req.session.userId,
     startDate: new Date(startDate),
     cycleLength: parseInt(cycleLength),
-    symptoms: selectedSymptoms
+    symptoms: selectedSymptoms,
+    mood: mood // Add mood to the cycle data
   });
 
   try {
