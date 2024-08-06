@@ -10,7 +10,7 @@ const todoRoutes = require("./routes/todo");
 const discussionRoutes = require("./routes/discussions");
 const pomodoroRoutes = require('./routes/pomodoro');
 const happinessRoutes = require('./routes/happiness'); // Import happiness routes
-const MenstrualCycleRoutes = require('./routes/menstrualCycle'); // Import menstrual cycle routes
+const menstrualCycleRoutes = require('./routes/menstruation'); // Import menstrual cycle routes
 const User = require("./models/User"); // Import User model
 const fetch = require('node-fetch');
  
@@ -19,9 +19,8 @@ const app = express();
 // Set the view engine to ejs
 app.set("view engine", "ejs");
 
-// Serve static files
-app.use('/assets', express.static('assets'));
-app.use('/views', express.static('views'));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/views', express.static(path.join(__dirname, 'views')));
 
 // Configure session middleware
 app.use(
@@ -90,7 +89,7 @@ app.use("/api", userRoutes);
 app.use("/api/todos", ensureAuthenticated, todoRoutes);
 app.use("/api/discussions", ensureAuthenticated, discussionRoutes);
 app.use('/happiness', ensureAuthenticated, happinessRoutes); // Add happiness routes
-app.use('/api/MenstrualCycle', ensureAuthenticated, menstrualCycleRoutes); // Add menstrual cycle routes
+app.use('/api/menstrualcycle', ensureAuthenticated, menstrualCycleRoutes); // Add menstrual cycle routes
 
 // MongoDB connection
 mongoose
@@ -165,6 +164,9 @@ app.get('/about1', ensureAuthenticated, (req, res) => {
   res.render('about1', { firstname: req.session.firstname, profileImage: req.session.profileImage });
 });
 
+app.get('/menstruation', ensureAuthenticated, (req, res) => {
+  res.render('menstruation', { firstname: req.session.firstname, profileImage: req.session.profileImage });
+});
 
 // Profile route to render profile page with user data
 app.get('/profile', ensureAuthenticated, async (req, res) => {

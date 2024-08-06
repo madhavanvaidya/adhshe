@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="/assets/" data-template="vertical-menu-template-free">
 
 <head>
   <meta charset="utf-8" />
@@ -10,33 +10,45 @@
   <meta name="description" content="" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="../adhshe_icon.png" />
+  <link rel="icon" type="image/x-icon" href="/assets/adhshe_icon.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&display=swap" rel="stylesheet" />
 
-  <!-- Icons. Uncomment required icon fonts -->
-  <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="/assets/vendor/fonts/boxicons.css" />
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-  <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="../assets/css/demo.css" />
+  <link rel="stylesheet" href="/assets/vendor/css/core.css" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="/assets/css/demo.css" />
 
   <!-- Vendors CSS -->
-  <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+  <link rel="stylesheet" href="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="/assets/vendor/libs/apex-charts/apex-charts.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-  <!-- Page CSS -->
-
   <!-- Helpers -->
-  <script src="../assets/vendor/js/helpers.js"></script>
-
-  <!-- Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-  <script src="../assets/js/config.js"></script>
+  <script src="/assets/vendor/js/helpers.js"></script>
+  <script src="/assets/js/config.js"></script>
+  <style>
+    .form-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .form-container > div {
+      flex: 1;
+      min-width: 300px;
+    }
+    @media (min-width: 992px) {
+      .container-xxl .row {
+        display: flex;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -46,9 +58,9 @@
       <!-- Menu -->
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
         <div class="app-brand demo">
-          <a href="index.html" class="app-brand-link">
+          <a href="/index" class="app-brand-link">
             <span class="app-brand-logo demo">
-              <img src="../adhshe_icon.png" id="app-brand-logo" style="width: 50px;">
+              <img src="/assets/adhshe_icon.png" id="app-brand-logo" style="width: 50px;">
             </span>
             <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform: none;">ADHShe</span>
           </a>
@@ -135,7 +147,7 @@
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                   <div class="avatar avatar-online">
                     <img 
-                      src="<%= profileImage ? '/' + profileImage : '../assets/img/avatars/no-image.png' %>" 
+                      src="<%= profileImage ? '/' + profileImage : '/assets/img/avatars/no-image.png' %>" 
                       alt="user-avatar" 
                       class="w-px-40 h-auto rounded-circle" 
                     />
@@ -147,7 +159,7 @@
                       <div class="d-flex align-items-center">
                         <div class="flex-shrink-0 me-3">
                           <div class="avatar avatar-online">
-                            <img src="<%= profileImage ? '/' + profileImage : '../assets/img/avatars/no-image.png' %>" alt class="w-px-40 h-auto rounded-circle" />
+                            <img src="<%= profileImage ? '/' + profileImage : '/assets/img/avatars/no-image.png' %>" alt class="w-px-40 h-auto rounded-circle" />
                           </div>
                         </div>
                           <span class="fw-semibold d-block"><%= firstname %></span>
@@ -189,9 +201,9 @@
         <!-- Content wrapper -->
         <div class="content-wrapper">
           <!-- Content -->
-          <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
-              <div class="col-lg-8 mb-4 order-0">
+          <div class="container-xxl d-flex flex-grow-1 container-p-y">
+            <div class="row w-100">
+              <div class="col-lg-6 order-0">
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title text-primary">Menstrual Cycle Tracker</h5>
@@ -206,15 +218,72 @@
                       </div>
                       <div class="mb-3">
                         <label for="symptoms" class="form-label">Symptoms</label>
-                        <input type="text" class="form-control" id="symptoms" placeholder="Separate with commas" required>
+                        <div id="symptoms">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="cramping" value="Cramping">
+                            <label class="form-check-label" for="cramping">Cramping</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="bloating" value="Bloating">
+                            <label class="form-check-label" for="bloating">Bloating</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="headache" value="Headache">
+                            <label class="form-check-label" for="headache">Headache</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="mood-swings" value="Mood Swings">
+                            <label class="form-check-label" for="mood-swings">Mood Swings</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="fatigue" value="Fatigue">
+                            <label class="form-check-label" for="fatigue">Fatigue</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="breast-tenderness" value="Breast Tenderness">
+                            <label class="form-check-label" for="breast-tenderness">Breast Tenderness</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="acne" value="Acne">
+                            <label class="form-check-label" for="acne">Acne</label>
+                          </div>
+                        </div>
                       </div>
-                      <div class="mb-3">
-                        <label for="mood" class="form-label">Mood</label>
-                        <input type="text" class="form-control" id="mood" required>
+                      <div class="form-group mb-3">
+                        <label for="mood" class="form-label">Mood:</label>
+                        <select id="mood" name="mood" class="form-control" required>
+                          <option value="Very Unpleasant">Very Unpleasant</option>
+                          <option value="Unpleasant">Unpleasant</option>
+                          <option value="Slightly Unpleasant">Slightly Unpleasant</option>
+                          <option value="Neutral">Neutral</option>
+                          <option value="Slightly Pleasant">Slightly Pleasant</option>
+                          <option value="Pleasant">Pleasant</option>
+                          <option value="Very Pleasant">Very Pleasant</option>
+                        </select>
                       </div>
                       <button class="btn btn-primary" type="submit">Add</button>
                     </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 mb-4 order-1">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">Entries</h5>
                     <ul id="menstrual-cycle-list" class="list-group mt-3"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="container-xxl d-flex flex-grow-1 container-p-y">
+            <div class="row w-100">
+              <div class="col-lg-12 mb-4 order-0">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">Suggestions</h5>
+                    <ul id="suggestions-list" class="list-group"></ul>
                   </div>
                 </div>
               </div>
@@ -250,21 +319,21 @@
 
   <!-- Core JS -->
   <!-- build:js assets/vendor/js/core.js -->
-  <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-  <script src="../assets/vendor/libs/popper/popper.js"></script>
-  <script src="../assets/vendor/js/bootstrap.js"></script>
-  <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-  <script src="../assets/vendor/js/menu.js"></script>
+  <script src="/assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="/assets/vendor/libs/popper/popper.js"></script>
+  <script src="/assets/vendor/js/bootstrap.js"></script>
+  <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="/assets/vendor/js/menu.js"></script>
   <!-- endbuild -->
 
   <!-- Vendors JS -->
-  <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+  <script src="/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
   <!-- Main JS -->
-  <script src="../assets/js/main.js"></script>
+  <script src="/assets/js/main.js"></script>
 
   <!-- Page JS -->
-  <script src="../assets/js/dashboards-analytics.js"></script>
+  <script src="/assets/js/dashboards-analytics.js"></script>
 
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -276,16 +345,44 @@
       const form = document.getElementById('menstrual-cycle-form');
       const startDateInput = document.getElementById('start-date');
       const cycleLengthInput = document.getElementById('cycle-length');
-      const symptomsInput = document.getElementById('symptoms');
+      const symptomsInputs = document.querySelectorAll('#symptoms input[type="checkbox"]');
       const moodInput = document.getElementById('mood');
       const list = document.getElementById('menstrual-cycle-list');
+      const suggestionsList = document.getElementById('suggestions-list');
+
+      const suggestions = {
+        "Cramping": ["Use a heating pad on your abdomen.", "Try gentle yoga or stretching exercises."],
+        "Bloating": ["Drink plenty of water.", "Avoid salty foods."],
+        "Headache": ["Rest in a quiet, dark room.", "Take a warm bath."],
+        "Mood Swings": ["Practice deep breathing exercises.", "Try to get some sunlight."],
+        "Fatigue": ["Take short naps during the day.", "Limit caffeine intake."],
+        "Breast Tenderness": ["Wear a supportive bra.", "Avoid caffeine and salt."],
+        "Acne": ["Wash your face twice a day.", "Avoid oily cosmetics."]
+      };
 
       // Fetch and display menstrual cycles
       async function fetchCycles() {
         try {
-          const response = await fetch('/api/MenstrualCycle');
+          const response = await fetch('/api/menstrualcycle');
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
           const cycles = await response.json();
           list.innerHTML = '';
+          const latestCycle = cycles[cycles.length - 1] || {};
+          const cycleSymptoms = latestCycle.symptoms || [];
+
+          cycleSymptoms.forEach(symptom => {
+            if (suggestions[symptom]) {
+              suggestions[symptom].forEach(suggestion => {
+                const suggestionItem = document.createElement('li');
+                suggestionItem.className = 'list-group-item';
+                suggestionItem.textContent = suggestion;
+                suggestionsList.appendChild(suggestionItem);
+              });
+            }
+          });
+
           cycles.forEach(cycle => {
             const listItem = document.createElement('li');
             listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
@@ -315,10 +412,12 @@
         e.preventDefault();
         const startDate = startDateInput.value;
         const cycleLength = cycleLengthInput.value;
-        const symptoms = symptomsInput.value.split(',').map(s => s.trim());
+        const symptoms = Array.from(symptomsInputs)
+          .filter(input => input.checked)
+          .map(input => input.value);
         const mood = moodInput.value;
         try {
-          const response = await fetch('/api/MenstrualCycle', {
+          const response = await fetch('/api/menstrualcycle', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -340,7 +439,7 @@
       // Delete a menstrual cycle
       async function deleteCycle(id) {
         try {
-          const response = await fetch(`/api/MenstrualCycle/${id}`, {
+          const response = await fetch(`/api/menstrualcycle/${id}`, {
             method: 'DELETE'
           });
           if (response.ok) {
@@ -361,6 +460,7 @@
       fetchCycles();
     });
   </script>
+
 </body>
 
 </html>

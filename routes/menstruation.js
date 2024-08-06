@@ -1,9 +1,27 @@
+// routes/menstrualcycle.js
+
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const MenstrualCycle = require('../models/MenstrualCycle'); 
+const MenstrualCycle = require('../models/menstruation'); 
 
-// GET all menstrual cycles
+// Middleware to get a menstrual cycle by ID
+async function getMenstrualCycle(req, res, next) {
+  let cycle;
+  try {
+    cycle = await MenstrualCycle.findById(req.params.id);
+    if (cycle == null) {
+      return res.status(404).json({ message: 'Cannot find cycle' });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+
+  res.cycle = cycle;
+  next();
+}
+
+// GET all menstrual cycles and render the menstruation view
 router.get('/', async (req, res) => {
   try {
     const cycles = await MenstrualCycle.find();
@@ -21,7 +39,7 @@ router.get('/:id', getMenstrualCycle, (req, res) => {
 // POST a new menstrual cycle
 router.post('/', async (req, res) => {
   const cycle = new MenstrualCycle({
-    userId: req.body.userId,
+    userId: req.session.userId,
     startDate: req.body.startDate,
     cycleLength: req.body.cycleLength,
     symptoms: req.body.symptoms,
@@ -64,28 +82,16 @@ router.patch('/:id', getMenstrualCycle, async (req, res) => {
 
 // DELETE a specific menstrual cycle by ID
 router.delete('/:id', getMenstrualCycle, async (req, res) => {
+  const { id } = req.params;
   try {
-    await res.cycle.remove();
-    res.status(204).json({ message: 'Deleted Cycle' });
+    const result = await MenstrualCycle.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).json({ message: 'Entry not found' });
+    }
+    res.status(200).json({ message: 'Menstrual Cycle Entry deleted' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
-
-// Middleware to get a menstrual cycle by ID
-async function getMenstrualCycle(req, res, next) {
-  let cycle;
-  try {
-    cycle = await MenstrualCycle.findById(req.params.id);
-    if (cycle == null) {
-      return res.status(404).json({ message: 'Cannot find cycle' });
-    }
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-
-  res.cycle = cycle;
-  next();
-}
 
 module.exports = router;
