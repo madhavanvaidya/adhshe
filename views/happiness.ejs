@@ -27,6 +27,8 @@
   <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
   <!-- Helpers -->
   <script src="../assets/vendor/js/helpers.js"></script>
   <script src="../assets/js/config.js"></script>
@@ -474,6 +476,8 @@
   <script src="../assets/vendor/libs/popper/popper.js"></script>
   <script src="../assets/vendor/js/bootstrap.js"></script>
   <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script src="../assets/vendor/js/menu.js"></script>
   <!-- endbuild -->
   <!-- Vendors JS -->
@@ -570,8 +574,10 @@
         form.reset();
         updateVideoSection(data.mood);
         updateMoodMessage(data.mood);
+        toastr.success("Mood logged successfully")
       } else {
         alert('Failed to log mood entry.');
+        toastr.error("Mood cannot be logged")
       }
     });
 

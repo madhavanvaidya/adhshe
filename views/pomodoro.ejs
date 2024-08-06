@@ -32,6 +32,8 @@
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
   <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 
   <!-- Page CSS -->
@@ -292,6 +294,8 @@
   <!-- Page JS -->
   <script src="../assets/js/dashboards-analytics.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
@@ -357,6 +361,7 @@
 
       document.getElementById('start-timer').addEventListener('click', function () {
         if (!isRunning) {
+          toastr.success('Timer has started!');
           const totalWorkMinutes = parseInt(workDurationInput.value);
           const totalWorkSeconds = totalWorkMinutes * 60;
           cycleCount = Math.ceil(totalWorkSeconds / (workTime + breakTime));
@@ -390,6 +395,7 @@
         const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
         totalTimeSpent += elapsedTime;
         updateTaskTime(taskSelection.value, totalTimeSpent / 60);
+        toastr.error("Timer Stopped. Looks like you need a break!")
       });
 
       document.getElementById('reset-timer').addEventListener('click', function () {
@@ -398,6 +404,7 @@
         updateDisplay(timerTime);
         isRunning = false;
         totalTimeSpent = 0;
+        toastr.info("The timer has been reset successfully")
       });
 
       async function fetchTasks() {
