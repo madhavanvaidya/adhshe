@@ -427,7 +427,7 @@
           if (response.ok) {
             fetchCycles();
             form.reset();
-            showToast('Cycle added successfully', 'success');
+            toastr.info("Cycle added successfully");
           } else {
             console.error('Error adding cycle:', await response.json());
           }
@@ -444,7 +444,7 @@
           });
           if (response.ok) {
             fetchCycles();
-            showToast('Cycle deleted', 'error');
+            toastr.error("Cycle deleted");
           } else {
             console.error('Error deleting cycle:', await response.json());
           }
