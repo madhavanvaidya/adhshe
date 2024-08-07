@@ -95,5 +95,16 @@ router.put('/:id/time', async (req, res) => {
 });
 
 
+// Add a route to get total time spent on tasks
+router.get('/total-time-spent', async (req, res) => {
+  try {
+    const todos = await Todo.find({ user: req.user.id }); // Adjust the query as necessary to match your schema
+    const totalTimeSpent = todos.reduce((total, todo) => total + (todo.timeSpent || 0), 0);
+    res.json({ totalTimeSpent });
+  } catch (err) {
+    res.status(500).send("Error fetching total time spent");
+  }
+});
+
 
 module.exports = router;

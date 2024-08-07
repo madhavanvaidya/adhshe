@@ -119,6 +119,7 @@ app.get("/fp", (req, res) => {
 
 app.get("/index", ensureAuthenticated, async (req, res) => {
   try {
+    // Fetch tasks summary
     const response = await fetch(`http://localhost:${port}/api/todos/summary`, {
       method: "GET",
       headers: {
@@ -130,6 +131,7 @@ app.get("/index", ensureAuthenticated, async (req, res) => {
     const { total, completed } = summary;
     const completionPercentage = total > 0 ? (completed / total) * 100 : 0;
 
+    // Fetch mood data
     const moodResponse = await fetch(`http://localhost:${port}/happiness/fetch`, {
       method: "GET",
       headers: {
@@ -139,16 +141,29 @@ app.get("/index", ensureAuthenticated, async (req, res) => {
     });
     const moodData = await moodResponse.json();
 
+    // Fetch a random motivational quote
+    const quoteResponse = await fetch('https://type.fit/api/quotes');
+    const quotes = await quoteResponse.json();
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+    // Clean up author name
+    let quoteAuthor = randomQuote.author;
+    if (!quoteAuthor || quoteAuthor.toLowerCase() === "type.fit") {
+      quoteAuthor = "Unknown";
+    }
+
     res.render("index", {
       firstname: req.session.firstname,
       profileImage: req.session.profileImage,
       totalTasks: total,
       completedTasks: completed,
-      completionPercentage: completionPercentage,
+      completionPercentage: completionPercentage.toFixed(2), // To display 2 decimal places
       moodData: moodData,
+      quote: randomQuote.text,
+      quoteAuthor: randomQuote.author || "Unknown"
     });
   } catch (err) {
-    res.status(500).send("Error fetching tasks summary");
+    res.status(500).send("Error fetching data for the index page");
   }
 });
 

@@ -44,6 +44,9 @@
     .equal-height > .col > .card {
       flex: 1;
     }
+    .fc-event {
+    color: white !important;
+  }
   </style>
 </head>
 <body>
@@ -193,24 +196,37 @@
                       <div class="card-body">
                         <h5 class="card-title text-primary">Congratulations <%= firstname %>!</h5>
                         <p class="mb-4">
-                          You have been <span class="fw-bold"><small class="text-success fw-semibold"></i><%= completionPercentage %>%</small></span> productive today!
+                          You have been <span class="fw-bold"><small class="text-success fw-semibold"><%= completionPercentage %>%</small></span> productive today!
                         </p>
                         <a href="/todo" class="btn btn-sm btn-outline-primary">View Progress</a>
                       </div>
                     </div>
+                    
                     <div class="col-sm-5 text-center text-sm-left">
                       <div class="card-body pb-0 px-0 px-md-4">
                         <img src="../assets/img/illustrations/girl-doing-yoga-light.png" height="140" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.png" />
                       </div>
                     </div>
+
+                    <div class="col-sm-7">
+                      <div class="card-body">
+                        <h5 class="card-title text-primary">Motivational Quote</h5>
+                        <p class="">
+                          "<%= quote %>"
+                        </p>
+                        <p class="text-right">
+                          <em>- <%= quoteAuthor %></em>
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-md-4 order-1">
+              <div class="col-lg-4 col-md-4 order-1" style="padding-bottom: 0;">
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title">Tasks Progress</h5>
-                    <div style="position: relative; height: 200px;">
+                    <div style="position: relative; height: 150px; margin-bottom: 0;">
                       <canvas id="tasksProgressChart"></canvas>
                     </div>
                   </div>
@@ -226,7 +242,7 @@
                 </div>
               </div>
               <!-- Calendar -->
-              <div class="col-lg-4 col-md-4 my-4 order-2">
+              <div class="col-12 col-lg-8 order-3 order-md-3 order-lg-2 my-4">
                 <div class="card">
                   <div class="card-body">
                     <h5 class="card-title">Menstrual Cycle Calendar</h5>
@@ -283,13 +299,27 @@
       fetch('/api/menstrualcycle')
         .then(response => response.json())
         .then(data => {
-          // Map the data to FullCalendar events
-          const events = data.map(cycle => ({
-            title: `Cycle Start`,
-            start: cycle.startDate,
-            end: moment(cycle.startDate).add(cycle.cycleLength, 'days').format('YYYY-MM-DD')
-          }));
-
+          // Map the data to FullCalendar events with hover details
+          const events = data.map(cycle => {
+            const startDate = new Date(cycle.startDate);
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + cycle.cycleLength);
+  
+            return {
+              title: `Cycle Start`,
+              start: startDate,
+              end: endDate,
+              extendedProps: {
+                cycleLength: cycle.cycleLength,
+                symptoms: cycle.symptoms.join(', '),
+                mood: cycle.mood
+              },
+              backgroundColor: getRandomColor(), // Assign random color
+              borderColor: getRandomColor(), // Assign random border color
+              textColor: 'white' // Set text color to white
+            };
+          });
+  
           // Initialize FullCalendar
           $('#calendar').fullCalendar({
             header: {
@@ -298,10 +328,32 @@
               right: 'month,agendaWeek,agendaDay'
             },
             editable: false,
-            events: events
+            events: events,
+            eventRender: function(event, element) {
+              element.attr('title', `
+                Start Date: ${new Date(event.start).toLocaleDateString()}
+                End Date: ${new Date(event.end).toLocaleDateString()}
+                Cycle Length: ${event.extendedProps.cycleLength} days
+                Symptoms: ${event.extendedProps.symptoms}
+                Mood: ${event.extendedProps.mood}
+              `);
+              element.tooltip({
+                content: element.attr('title')
+              });
+            }
           });
         });
-
+  
+      // Function to generate random colors
+      function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+  
       // Destroy existing charts if they exist
       if (window.moodChart && typeof window.moodChart.destroy === 'function') {
         window.moodChart.destroy();
@@ -309,13 +361,13 @@
       if (window.tasksProgressChart && typeof window.tasksProgressChart.destroy === 'function') {
         window.tasksProgressChart.destroy();
       }
-
+  
       // Assuming moodData, totalTasks, and completedTasks are passed from the server and available here
       const moodData = <%- JSON.stringify(moodData) %>;
       const totalTasks = <%= totalTasks %>;
       const completedTasks = <%= completedTasks %>;
       const uncompletedTasks = totalTasks - completedTasks;
-
+  
       // Map mood selections to numerical values
       const moodMap = {
         "Very Unpleasant": 1,
@@ -326,10 +378,10 @@
         "Pleasant": 6,
         "Very Pleasant": 7
       };
-
+  
       const dates = moodData.map(entry => new Date(entry.date).toLocaleDateString());
       const moods = moodData.map(entry => moodMap[entry.mood]);
-
+  
       // Create the mood chart
       const moodCtx = document.getElementById('moodChart').getContext('2d');
       window.moodChart = new Chart(moodCtx, {
@@ -339,8 +391,8 @@
           datasets: [{
             label: 'Mood',
             data: moods,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
             fill: true,
           }]
         },
@@ -359,8 +411,8 @@
           }
         }
       });
-
-      // Create the tasks progress chart with blue accents and aligned legend
+  
+      // Create the tasks progress chart with a new color scheme
       const tasksCtx = document.getElementById('tasksProgressChart').getContext('2d');
       window.tasksProgressChart = new Chart(tasksCtx, {
         type: 'doughnut',
@@ -385,7 +437,7 @@
               labels: {
                 boxWidth: 20,
                 padding: 15,
-                color: '#007bff'
+                color: '#28a745'
               }
             },
             tooltip: {
@@ -402,5 +454,6 @@
       });
     });
   </script>
+
 </body>
 </html>

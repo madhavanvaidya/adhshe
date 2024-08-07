@@ -78,19 +78,13 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="/index" class="menu-link">
-              <i class="menu-icon tf-icons bx bxs-info-circle"></i>
-              <div data-i18n="Analytics">About</div>
-            </a>
-          </li>
-          <li class="menu-item">
             <a href="/todo" class="menu-link">
               <i class="menu-icon tf-icons bx bx-list-check"></i>
               <div data-i18n="Analytics">To-Do List</div>
             </a>
           </li>
           <li class="menu-item active">
-            <a href="#" class="menu-link">
+            <a href="/menstruation" class="menu-link">
               <i class="menu-icon tf-icons bx bxs-heart-circle"></i>
               <div data-i18n="Analytics">Menstrual Cycle</div>
             </a>
@@ -108,15 +102,21 @@
             </a>
           </li>
           <li class="menu-item">
-            <a href="/aboutus" class="menu-link">
-              <i class="menu-icon tf-icons bx bxs-store"></i>
-              <div data-i18n="Analytics">Meet the developers</div>
-            </a>
-          </li>
-          <li class="menu-item">
             <a href="/happiness" class="menu-link">
               <i class="menu-icon tf-icons bx bx-smile"></i>
               <div data-i18n="Analytics">Mood Tracker</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="/about1" class="menu-link">
+              <i class="menu-icon tf-icons bx bxs-info-circle"></i>
+              <div data-i18n="Analytics">About</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="/aboutus" class="menu-link">
+              <i class="menu-icon tf-icons bx bxs-store"></i>
+              <div data-i18n="Analytics">Meet the developers</div>
             </a>
           </li>
         </ul>
@@ -349,17 +349,54 @@
       const moodInput = document.getElementById('mood');
       const list = document.getElementById('menstrual-cycle-list');
       const suggestionsList = document.getElementById('suggestions-list');
-
+  
       const suggestions = {
-        "Cramping": ["Use a heating pad on your abdomen.", "Try gentle yoga or stretching exercises."],
-        "Bloating": ["Drink plenty of water.", "Avoid salty foods."],
-        "Headache": ["Rest in a quiet, dark room.", "Take a warm bath."],
-        "Mood Swings": ["Practice deep breathing exercises.", "Try to get some sunlight."],
-        "Fatigue": ["Take short naps during the day.", "Limit caffeine intake."],
-        "Breast Tenderness": ["Wear a supportive bra.", "Avoid caffeine and salt."],
-        "Acne": ["Wash your face twice a day.", "Avoid oily cosmetics."]
+        "Cramping": [
+          "Use a heating pad on your abdomen.",
+          "Try gentle yoga or stretching exercises: <a href='https://youtu.be/EvMTrP8eRvM?si=M9XZjjY6vzveZSDg' target='_blank'>Yoga for Menstrual Cramps</a>",
+          "Apply clary sage essential oil to your lower abdomen.",
+          "Drink ginger tea to reduce inflammation and pain: <a href='https://www.allrecipes.com/recipe/241360/fresh-ginger-tea/' target='_blank'>Ginger Tea Recipe</a>"
+        ],
+        "Bloating": [
+          "Drink dandelion tea to reduce water retention.",
+          "Eat cucumber slices for their diuretic effect.",
+          "Include fennel seeds in your diet to reduce gas and bloating.",
+          "Avoid dairy products that can contribute to bloating.",
+          "Try this anti-bloating smoothie: <a href='https://youtu.be/_gJaWCQvgU8?si=mFjv-6p0-D2gOhsa' target='_blank'>Anti-Bloating Smoothie Recipe</a>"
+        ],
+        "Headache": [
+          "Massage peppermint oil onto your temples.",
+          "Practice progressive muscle relaxation.",
+          "Eat a small, balanced snack with protein and complex carbs.",
+          "Stay hydrated by sipping on electrolyte-rich drinks.",
+          "Follow this guided meditation for headache relief: <a href='https://youtu.be/dzXaNxdXPiE?si=3p3BirSIn2N62vy7' target='_blank'>Headache Relief Meditation</a>"
+        ],
+        "Mood Swings": [
+          "Engage in mindfulness meditation for emotional balance: <a href='https://youtu.be/FGtYwO9mNZY?si=PzMtUg_27izomHVs' target='_blank'>Mindfulness Meditation</a>",
+          "Create a journal to track and express your feelings.",
+          "Include omega-3 fatty acids in your diet (e.g., salmon, walnuts): <a href='https://www.bbcgoodfood.com/recipes/salmon-teriyaki' target='_blank'>Salmon Teriyaki Recipe</a>",
+          "Listen to calming music or nature sounds."
+        ],
+        "Fatigue": [
+          "Consume a smoothie with spinach, banana, and chia seeds: <a href='https://youtu.be/225AHL57ei8?si=_PlNYFA61aRtd4uo' target='_blank'>Energy Boosting Smoothie</a>",
+          "Practice restorative yoga or tai chi: <a href='https://youtu.be/c6Qweqs8CO4?si=wRsVXj3D9E7iQ6SC' target='_blank'>Restorative Yoga</a>",
+          "Include lean protein sources in your meals (e.g., chicken, beans): <a href='https://www.bbcgoodfood.com/recipes/collection/high-protein' target='_blank'>High Protein Recipes</a>",
+          "Take breaks to do light stretching or a short walk."
+        ],
+        "Breast Tenderness": [
+          "Apply a cold cabbage leaf compress to the affected area.",
+          "Take a magnesium supplement as it may reduce tenderness.",
+          "Reduce intake of refined sugars and processed foods.",
+          "Perform gentle chest stretches to improve circulation: <a href='https://youtu.be/MYO9nS48OQE?si=g_xZxYlvwydfiCtF' target='_blank'>Chest Stretching Exercises</a>"
+        ],
+        "Acne": [
+          "Apply a honey and cinnamon mask to reduce inflammation: <a href='https://www.healthline.com/health/honey-and-cinnamon-for-acne' target='_blank'>Honey and Cinnamon Mask</a>",
+          "Use a tea tree oil spot treatment on affected areas.",
+          "Incorporate zinc-rich foods into your diet (e.g., pumpkin seeds): <a href='https://www.bbcgoodfood.com/recipes/collection/zinc-recipes' target='_blank'>Zinc Rich Recipes</a>",
+          "Avoid heavy makeup and let your skin breathe."
+        ]
       };
-
+  
       // Fetch and display menstrual cycles
       async function fetchCycles() {
         try {
@@ -369,20 +406,25 @@
           }
           const cycles = await response.json();
           list.innerHTML = '';
-          const latestCycle = cycles[cycles.length - 1] || {};
+          suggestionsList.innerHTML = '';
+  
+          // Sort cycles by date, latest first
+          cycles.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+  
+          const latestCycle = cycles[0] || {};
           const cycleSymptoms = latestCycle.symptoms || [];
-
+  
           cycleSymptoms.forEach(symptom => {
             if (suggestions[symptom]) {
               suggestions[symptom].forEach(suggestion => {
                 const suggestionItem = document.createElement('li');
                 suggestionItem.className = 'list-group-item';
-                suggestionItem.textContent = suggestion;
+                suggestionItem.innerHTML = suggestion;
                 suggestionsList.appendChild(suggestionItem);
               });
             }
           });
-
+  
           cycles.forEach(cycle => {
             const listItem = document.createElement('li');
             listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
@@ -406,7 +448,7 @@
           console.error('Error fetching cycles:', error);
         }
       }
-
+  
       // Add a new menstrual cycle
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -435,7 +477,7 @@
           console.error('Error adding cycle:', error);
         }
       });
-
+  
       // Delete a menstrual cycle
       async function deleteCycle(id) {
         try {
@@ -452,14 +494,17 @@
           console.error('Error deleting cycle:', error);
         }
       }
-
+  
       function showToast(message, type) {
         toastr[type](message);
       }
-
+  
       fetchCycles();
     });
   </script>
+  
+  
+  
 
 </body>
 
