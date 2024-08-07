@@ -13,9 +13,9 @@ const happinessRoutes = require('./routes/happiness'); // Import happiness route
 const menstrualCycleRoutes = require('./routes/menstruation'); // Import menstrual cycle routes
 const User = require("./models/User"); // Import User model
 const fetch = require('node-fetch');
- 
+
 const app = express();
- 
+
 // Set the view engine to ejs
 app.set("view engine", "ejs");
 
@@ -34,7 +34,7 @@ app.use(
     },
   })
 );
- 
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
@@ -44,15 +44,15 @@ app.use(session({
 
 const port = process.env.PORT || 8000;
 const uri = process.env.MONGODB_URI; // Load MongoDB URI from .env file
- 
+
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); // Add this line to handle form submissions
 app.use(cors());
- 
+
 // Serve static files from the 'views' directory
 app.use(express.static("views"));
- 
+
 // Middleware to check session
 function checkSession(req, res, next) {
   if (req.session.userId) {
@@ -61,7 +61,7 @@ function checkSession(req, res, next) {
     res.redirect("/login");
   }
 }
- 
+
 function ensureAuthenticated(req, res, next) {
   if (req.session.userId) {
     next(); // if a session exists, proceed to the next function in the middleware/route chain
@@ -79,7 +79,7 @@ const isAuthenticated = (req, res, next) => {
 };
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
- 
+
 // Routes
 app.use('/api', userRoutes);
 app.use('/api/todos', ensureAuthenticated, todoRoutes);
@@ -99,24 +99,24 @@ mongoose
   })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log("MongoDB connection error: ", err));
- 
+
 // Apply checkSession middleware to the root route
 app.get("/", checkSession);
- 
+
 // Serve register.html on /register route
 app.get("/register", (req, res) => {
   res.sendFile("auth-register-basic.html", { root: "./views" });
 });
- 
+
 // Define a basic route to render login.html
 app.get("/login", (req, res) => {
   res.sendFile("auth-login-basic.html", { root: "./views" });
 });
- 
+
 app.get("/fp", (req, res) => {
   res.sendFile("auth-forgot-password-basic.html", { root: "./views" });
 });
- 
+
 app.get("/index", ensureAuthenticated, async (req, res) => {
   try {
     const response = await fetch(`http://localhost:${port}/api/todos/summary`, {
@@ -138,7 +138,7 @@ app.get("/index", ensureAuthenticated, async (req, res) => {
       },
     });
     const moodData = await moodResponse.json();
- 
+
     res.render("index", {
       firstname: req.session.firstname,
       profileImage: req.session.profileImage,
@@ -151,11 +151,11 @@ app.get("/index", ensureAuthenticated, async (req, res) => {
     res.status(500).send("Error fetching tasks summary");
   }
 });
- 
+
 app.get("/todo", ensureAuthenticated, (req, res) => {
   res.render("todo", { firstname: req.session.firstname, profileImage: req.session.profileImage });
 });
- 
+
 app.get('/aboutus', ensureAuthenticated, (req, res) => {
   res.render('aboutus', { firstname: req.session.firstname, profileImage: req.session.profileImage });
 });
@@ -193,7 +193,6 @@ app.get('/menstrual-cycle', ensureAuthenticated, (req, res) => {
   res.render('menstrualCycle', { firstname: req.session.firstname, profileImage: req.session.profileImage });
 });
 
- 
 // POST route for user registration
 app.post("/api/register", async (req, res) => {
   const { firstname, email, password } = req.body;
@@ -206,7 +205,7 @@ app.post("/api/register", async (req, res) => {
           '<script>alert("User already exists"); window.location.href = "/login";</script>'
         );
     }
- 
+
     const newUser = new User({ firstname, email, password });
     const savedUser = await newUser.save();
     res.send(
@@ -220,11 +219,11 @@ app.post("/api/register", async (req, res) => {
       );
   }
 });
- 
+
 app.get("/community", (req, res) => {
   res.render("community.ejs", { firstname: req.session.firstname, profileImage: req.session.profileImage });
 });
- 
+
 app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {

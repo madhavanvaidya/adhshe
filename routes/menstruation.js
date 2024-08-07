@@ -1,8 +1,5 @@
-// routes/menstrualcycle.js
-
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const MenstrualCycle = require('../models/menstruation'); 
 
 // Middleware to get a menstrual cycle by ID
@@ -24,12 +21,14 @@ async function getMenstrualCycle(req, res, next) {
 // GET all menstrual cycles and render the menstruation view
 router.get('/', async (req, res) => {
   try {
-    const cycles = await MenstrualCycle.find();
+    const userId = req.session.userId;
+    const cycles = await MenstrualCycle.find({ userId });
     res.status(200).json(cycles);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
+
 
 // GET a specific menstrual cycle by ID
 router.get('/:id', getMenstrualCycle, (req, res) => {
@@ -56,9 +55,6 @@ router.post('/', async (req, res) => {
 
 // PATCH (update) a specific menstrual cycle by ID
 router.patch('/:id', getMenstrualCycle, async (req, res) => {
-  if (req.body.userId != null) {
-    res.cycle.userId = req.body.userId;
-  }
   if (req.body.startDate != null) {
     res.cycle.startDate = req.body.startDate;
   }
@@ -81,17 +77,16 @@ router.patch('/:id', getMenstrualCycle, async (req, res) => {
 });
 
 // DELETE a specific menstrual cycle by ID
-router.delete('/:id', getMenstrualCycle, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const result = await MenstrualCycle.findByIdAndDelete(id);
     if (!result) {
       return res.status(404).json({ message: 'Entry not found' });
     }
-    res.status(200).json({ message: 'Menstrual Cycle Entry deleted' });
+    res.status(200).json({ message: 'Entry deleted' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
-
 module.exports = router;

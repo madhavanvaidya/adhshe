@@ -60,7 +60,7 @@
         <div class="app-brand demo">
           <a href="/index" class="app-brand-link">
             <span class="app-brand-logo demo">
-              <img src="/assets/adhshe_icon.png" id="app-brand-logo" style="width: 50px;">
+              <img src="../adhshe_icon.png" id="app-brand-logo" style="width: 50px;">
             </span>
             <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform: none;">ADHShe</span>
           </a>
@@ -427,7 +427,7 @@
           if (response.ok) {
             fetchCycles();
             form.reset();
-            showToast('Cycle added successfully', 'success');
+            toastr.info("Cycle added successfully");
           } else {
             console.error('Error adding cycle:', await response.json());
           }
@@ -444,7 +444,7 @@
           });
           if (response.ok) {
             fetchCycles();
-            showToast('Cycle deleted', 'error');
+            toastr.error("Cycle deleted");
           } else {
             console.error('Error deleting cycle:', await response.json());
           }
